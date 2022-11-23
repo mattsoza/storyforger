@@ -6,7 +6,11 @@ StoryForger is an online application that allows you to create and share
 
 ### Users
 
+<details>
+<summary>
+
 #### `POST /api/users/session` - Sign in user
+</summary>
 
 **Body**
 
@@ -23,8 +27,14 @@ StoryForger is an online application that allows you to create and share
 - `403` if the user is already logged in
 - `400` if username or password is not in correct format format or missing in the req
 - `401` if the user login credentials are invalid
+</details>
+
+<details>
+<summary>
 
 #### `DELETE /api/users/session` - Sign out user
+
+</summary>
 
 **Returns**
 
@@ -33,8 +43,13 @@ StoryForger is an online application that allows you to create and share
 **Throws**
 
 - `403` if user is not logged in
+</details>
+
+<details>
+<summary>
 
 #### `POST /api/users` - Create an new user account
+</summary>
 
 **Body**
 
@@ -51,6 +66,7 @@ StoryForger is an online application that allows you to create and share
 - `403` if there is a user already logged in
 - `400` if username or password is in the wrong format
 - `409` if username is already in use
+</details>
 
 <details>
 <summary>
@@ -75,7 +91,11 @@ StoryForger is an online application that allows you to create and share
 - `409` if the username is already in use
 </details>
 
+<details>
+<summary>
+
 #### `DELETE /api/users` - Delete user
+</summary>
 
 **Returns**
 
@@ -84,6 +104,7 @@ StoryForger is an online application that allows you to create and share
 **Throws**
 
 - `403` if the user is not logged in
+</details>
 
 ### Book
 
