@@ -13,7 +13,7 @@
     id="buttons"
     v-if="currentAction===null"
     >
-      <button @click="openSignup" class="acct signup">Sign-in</button>
+      <button @click="openSignup" class="acct signup">Signup</button>
       <button @click="openLogin" class="acct login">Login</button>
     </div>
     <div
