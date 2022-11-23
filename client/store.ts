@@ -5,12 +5,18 @@ import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state: {
-
-    },
-    mutations: {
-        
+  state: {
+    username: null
+  },
+  mutations: {
+    setUsername(state, username) {
+      /**
+       * Update the stored username to the specified one.
+        * @param username - new username to set
+        */
+      state.username = username;
     }
+  }
 })
 
 export default store;

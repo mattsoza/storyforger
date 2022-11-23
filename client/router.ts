@@ -4,13 +4,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import LoginPage from './components/Login/LoginPage.vue';
+import AccountPage from './components/Account/AccountPage.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
-    {path: '/', name: 'Home', component: LoginPage}
+    {path: '/', name: 'Home', component: LoginPage},
     // {path: '/my-stories', name: 'MyStories', component: StoryHome},
-    // {path: '/account', name: 'Account', component: AccountPage}
+    {path: '/account', name: 'Account', component: AccountPage}
 ]
 
 const router = new VueRouter({routes});
@@ -29,9 +30,8 @@ router.beforeEach((to, from, next) => {
       next({name: 'MyStories'});
       return;
     }
-
     if (to.name === 'Account' && !router.app.$store.state.username) {
-      next({name: 'Login'}); // Go to Login page if user navigates to Account and are not signed in
+      next({name: 'Home'}); // Go to Login page if user navigates to Account and are not signed in
       return;
     }
   }
