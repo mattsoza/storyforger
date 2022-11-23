@@ -52,7 +52,11 @@ StoryForger is an online application that allows you to create and share
 - `400` if username or password is in the wrong format
 - `409` if username is already in use
 
+<details>
+<summary>
+
 #### `PUT /api/users` - Update a user's profile
+</summary>
 
 **Body** _(no need to add fields that are not being changed)_
 
@@ -69,6 +73,7 @@ StoryForger is an online application that allows you to create and share
 - `403` if the user is not logged in
 - `400` if username or password is in the wrong format
 - `409` if the username is already in use
+</details>
 
 #### `DELETE /api/users` - Delete user
 
