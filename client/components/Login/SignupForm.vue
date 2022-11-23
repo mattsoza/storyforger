@@ -19,7 +19,7 @@ export default {
       ],
       title: 'Create account',
       callback: () => {
-        this.$router.push({name: 'MyStories'});
+        this.$router.push({name: 'Home'});
       }
     }
   }

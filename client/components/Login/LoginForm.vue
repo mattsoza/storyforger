@@ -9,7 +9,7 @@ export default {
   mixins: [BlockForm],
   data() {
     return {
-      url: '/api/users/sessions',
+      url: '/api/users/session',
       method: 'POST',
       setUsername: true,
       hasBody: true,
@@ -19,7 +19,7 @@ export default {
       ],
       title: 'Login',
       callback: () => {
-        this.$router.push({name: 'MyStories'});
+        this.$router.push({name: 'Home'});
       }
     }
   }

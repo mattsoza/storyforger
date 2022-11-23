@@ -5,7 +5,7 @@
   <main class="accountPage">
     <section class="accountPage">
       <header>
-        <h2>Account settings for @{{ $store.state.username }}</h2>
+        <h2>Account settings for {{ $store.state.username }}</h2>
       </header>
       <ChangeUsernameForm class="changeusername" />
       <ChangePasswordForm class="changePass" />
