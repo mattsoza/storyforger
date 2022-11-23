@@ -8,9 +8,25 @@
     <h2>
       Make choose-your-own-adventure books with ease!
     </h2>
-    <div id="buttons">
-      <button class="acct signup">Sign-in</button>
-      <button class="acct login">Login</button>
+    
+    <div
+    id="buttons"
+    v-if="currentAction===null"
+    >
+      <button @click="openSignup" class="acct signup">Sign-in</button>
+      <button @click="openLogin" class="acct login">Login</button>
+    </div>
+    <div
+    v-else-if="currentAction==='signup'"
+    >
+      <SignupForm />
+      <h3>Already have an account? <a @click="openLogin">Login</a> instead.</h3>
+    </div>
+    <div
+    v-else-if="currentAction==='login'"
+    >
+      <LoginForm />
+      <h3>Need an account? <a @click="openSignup">Signup</a> instead</h3>
     </div>
   </div>
 </template>
@@ -21,7 +37,20 @@ import SignupForm from '@/components/Login/SignupForm.vue';
 
 export default {
   name: 'LoginPage',
-  components: {LoginForm, SignupForm}
+  data() {
+    return {
+      currentAction: null,
+    }
+  },
+  components: {LoginForm, SignupForm},
+  methods: {
+    openLogin() {
+      this.currentAction = 'login';
+    },
+    openSignup() {
+      this.currentAction = 'signup';
+    }
+  }
 };
 </script>
 
@@ -30,6 +59,15 @@ export default {
   h1 {
     font-size: 4em;
     margin-bottom: 0rem;
+  }
+
+  a {
+    color: #4DBCEC;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: #3D95BA;
   }
 
   #frontPage {

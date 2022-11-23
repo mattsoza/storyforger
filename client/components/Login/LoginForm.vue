@@ -17,7 +17,7 @@ export default {
         {id: 'username', label: 'Username', value: ''},
         {id: 'password', label: 'Password', value: ''}
       ],
-      title: 'Sign in',
+      title: 'Login',
       callback: () => {
         this.$router.push({name: 'MyStories'});
       }
