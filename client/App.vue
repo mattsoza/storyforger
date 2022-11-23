@@ -25,4 +25,7 @@ export default {
 </script>
 
 <style>
+body {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
 </style>
