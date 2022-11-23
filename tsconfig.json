@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "module": "commonjs"
+  },
+  "vueCompilerOptions": {
+    "target": 2.7,
+    // "target": 2, // For Vue version <= 2.6.14
+  }
+}
