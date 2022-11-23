@@ -31,7 +31,6 @@ StoryForger is an online application that allows you to create and share
 
 <details>
 <summary>
-
 #### `DELETE /api/users/session` - Sign out user
 
 </summary>
@@ -47,7 +46,6 @@ StoryForger is an online application that allows you to create and share
 
 <details>
 <summary>
-
 #### `POST /api/users` - Create an new user account
 </summary>
 
@@ -70,7 +68,6 @@ StoryForger is an online application that allows you to create and share
 
 <details>
 <summary>
-
 #### `PUT /api/users` - Update a user's profile
 </summary>
 
@@ -93,7 +90,6 @@ StoryForger is an online application that allows you to create and share
 
 <details>
 <summary>
-
 #### `DELETE /api/users` - Delete user
 </summary>
 
