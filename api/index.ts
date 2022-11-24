@@ -10,6 +10,14 @@ import * as userValidator from '../server/user/middleware';
 import {userRouter} from '../server/user/router';
 import MongoStore from 'connect-mongo';
 
+import { Session } from 'express-session'
+
+declare module 'express-session' {
+ interface Session {
+    userId: string;
+  }
+}
+
 // Load environmental variables
 dotenv.config({});
 
