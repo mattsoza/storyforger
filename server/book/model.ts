@@ -21,31 +21,32 @@ export type Book = {
 // Books stored in this table will have these fields, with the
 // type given by the type property, inside MongoDB
 const BookSchema = new Schema({
-  // The book's bookname
+  // The book's name
   title: {
     type: String,
     required: true
   },
-  // The book's password
+  // The book's author
   author: {
     type: Types.ObjectId,
     required: true
   },
-  // The date the book joined
+  // A description of the book
   summary: {
     type: String,
     required: false
   },
+  // A list of users who can see the book
   sharedWith:{
     type: Array<Types.ObjectId>,
     required: false
   },
-
+  // Whether everybody can see book (else only users in sharedWith or author)
   public: {
     type: Boolean,
     required: true
   },
-
+  // Page to start on (only missing if there are no pages yet)
   firstPage:{
     type: Types.ObjectId,
     required: false
