@@ -130,3 +130,60 @@ StoryForger is an online application that allows you to create and share
 #### `POST /api/connection/` - Creates a new connection
 
 #### `DELETE /api/connection/:id` - Deletes a connection
+
+
+
+### Connection
+
+<details> 
+<summary>
+
+#### `GET /api/connections/?bookId=bookId` - Get all connections in book
+
+</summary>
+</details>
+
+
+<details>
+<summary>
+
+#### `GET /api/connections/?pageId=pageId` - Get all outgoing connections from a page
+
+</summary>
+</details>
+<details>
+<summary>
+
+#### `GET /api/connections/:connectionId` - Get specific connection
+
+</summary>
+</details>
+
+
+<details>
+<summary>
+
+#### `POST /api/connections/` - Create a new connection
+
+</summary>
+body: {parent: pageId, child: pageId, text: string}
+</details>
+<details>
+<summary>
+
+#### `PUT /api/connections/:connectionId` - Modify a connection
+
+</summary>
+body: {child?: pageId, text?: string}
+</details>
+
+
+<details>
+<summary>
+
+#### `DELETE /api/connections/:connectionId` - Get all outgoing connections from a page
+
+</summary>
+</details>
+
+
