@@ -5,15 +5,21 @@
     <li
     v-for="page in pages"
     :key="page._id"
-    @click="selectPage"
+    :page="page"
+    @click="(currentPage=page)"
     >{{ page.title }}</li>
   </ul>
+  <PageView :page="currentPage" />
 </template>
 
 <script>
+import PageView from './PageView.vue'
 
 export default {
   name: 'PageListComponent',
+  components: {
+    PageView
+  },
   props: {
     // The array containing all the page objects. Calculated upon opening book?
     pages: {
@@ -24,12 +30,6 @@ export default {
   data () {
     return {
       currentPage: null
-    }
-  },
-  methods: {
-    // TODO: finish writing out this function. Should assign this.currentPage and $emit (unless page edit is a child of it...)
-    selectPage (evt) {
-      console.log(evt)
     }
   }
 }

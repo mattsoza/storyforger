@@ -1,16 +1,15 @@
 <!-- Reusable component that displays a book, it's title, and gives the ability to open editing mode -->
 
 <template>
-  <div>
+  <div @click="storeBook">
     <h1>{{ title }}</h1>
     <h2>{{ description }}</h2>
-    <button @click="">Edit</button>
-    <button @click="">View</button>
+    <router-link class="routelink" to='/story'>Edit Book</router-link>
     <button @click="deleteBook">Delete</button>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   name: 'BookComponent',
   props: {
@@ -28,6 +27,12 @@ export default {
     }
   },
   methods: {
+    storeBook () {
+      /**
+       * Updates the current book in vuex
+       */
+      this.$store.commit('setCurrentBook', this.book)
+    },
     editTitle (evt) {
       /**
        * Edits the title of the book
@@ -41,7 +46,7 @@ export default {
       fetch(`/api/book/${this.bookId}`, params)
         .then((res) => {})
     },
-    deleteBook(evt) {
+    deleteBook (evt) {
       /**
        * Deletes this book from the user's account
        */
