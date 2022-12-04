@@ -2,7 +2,39 @@
 import multer from 'multer';
 import Aws from 'aws-sdk';
 import type {Page} from './model';
+import type {HydratedDocument} from 'mongoose';
+import BookCollection from '../book/collection'; 
+
 require("dotenv/config")
+
+type PageResponse = {
+    _id: string;
+    title: string;
+    bookId: string;
+    text: string;
+    imageUrl: string;
+  };
+
+const constructPageResponse = async (page: HydratedDocument<Page>): Promise<PageResponse> => {
+    const pageCopy: Page = {
+        ...page.toObject({
+        versionKey: false // Cosmetics; prevents returning of __v property
+        })
+    };
+
+    const bookItem = await BookCollection.findOneByBookId(pageCopy.bookId);
+    const book = bookItem._id as unknown as string;
+    delete pageCopy.bookId;
+
+    return {
+        ...pageCopy,
+        _id: pageCopy._id.toString(),
+        bookId: book
+      };
+}
+
+
+  
 
 
 // creating the storage variable to upload the file and providing the destination folder, 
@@ -31,5 +63,6 @@ const s3 = new Aws.S3({
 
 export {
     upload,
-    s3
+    s3,
+    constructPageResponse
 };

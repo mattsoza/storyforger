@@ -4,7 +4,9 @@ import BookCollection from './collection';
 import * as bookValidator from './middleware';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
+import * as pageUtil from '../page/util';
 import BookModel from './model';
+import PageCollection from 'server/page/collection';
 
 const router = express.Router();
 
@@ -44,9 +46,11 @@ router.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const bookId = req.query.bookId as string;
     const book = await BookCollection.findOneByBookId(bookId);
+    const pages = await PageCollection.findAllByBookId(bookId);
     res.status(200).json({
       message: 'Your session info was found successfully.',
-      book: book ? await util.constructBookResponse(book) : null
+      book: book ? await util.constructBookResponse(book) : null,
+      pages: pages ? pages.map(pageUtil.constructPageResponse): null
     });
   }
 );

@@ -18,8 +18,8 @@ class ConnectionCollection {
    * @param 
    * @return {Promise<HydratedDocument<Connection>>} - The newly created connection
    */
-  static async addOne(parent: Types.ObjectId|string, child: Types.ObjectId|string, text: string): Promise<HydratedDocument<Connection>> {
-    const connection = new ConnectionModel({parent, child, text});
+  static async addOne(parent: Types.ObjectId|string, child: Types.ObjectId|string, text: string, author: Types.ObjectId|string): Promise<HydratedDocument<Connection>> {
+    const connection = new ConnectionModel({parent, child, text, author});
     await connection.save(); // Saves connection to MongoDB
     return connection;
   }

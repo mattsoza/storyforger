@@ -16,6 +16,7 @@ export type Connection = {
   child: Types.ObjectId;
   text: string;
   book: Types.ObjectId;
+  author: Types.ObjectId;
 };
 
 export type PopulatedConnection = {
@@ -24,6 +25,7 @@ export type PopulatedConnection = {
   child: Page;
   text: string;
   book: Book;
+  author: User;
 }
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -50,6 +52,11 @@ const ConnectionSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
+
+  author: {
+    type: Schema.Types.ObjectId,
+    required: true
+  }
 });
 
 const ConnectionModel = model<Connection>('Connection', ConnectionSchema);
