@@ -6,6 +6,7 @@ import VueRouter from 'vue-router';
 import LoginPage from './components/Login/LoginPage.vue';
 import AccountPage from './components/Account/AccountPage.vue';
 import HomePage from './components/Home/HomePage.vue';
+import ImageUploadComponent from './components/Page/ImageUploadComponent.vue';
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,8 @@ const routes = [
     {path: '/', name: 'Home', component: HomePage},
     {path: '/login', name: 'Login', component: LoginPage},
     // {path: '/my-stories', name: 'MyStories', component: StoryHome},
-    {path: '/account', name: 'Account', component: AccountPage}
+    {path: '/account', name: 'Account', component: AccountPage},
+    {path: '/image', name: "Image Upload", component: ImageUploadComponent}
 ]
 
 const router = new VueRouter({routes});
