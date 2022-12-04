@@ -1,6 +1,6 @@
 import type {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
-import UserCollection from 'server/user/collection';
+import UserCollection from '../user/collection';
 import BookCollection from '../book/collection';
 
 

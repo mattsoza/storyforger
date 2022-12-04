@@ -9,6 +9,9 @@ import dotenv from 'dotenv';
 import * as userValidator from '../server/user/middleware';
 import {userRouter} from '../server/user/router';
 import {pageRouter} from '../server/page/router';
+import {bookRouter} from '../server/book/router';
+import { connectionRouter} from '../server/connection/router';
+
 import MongoStore from 'connect-mongo';
 
 import { Session } from 'express-session'
@@ -77,7 +80,10 @@ app.use(userValidator.isCurrentSessionUserExists);
 
 // Add routers from routes folder
 app.use('/api/users', userRouter);
-app.use('/api/page', pageRouter);
+app.use('/api/pages', pageRouter);
+app.use('/api/books', bookRouter);
+app.use('api/connections', connectionRouter);
+
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

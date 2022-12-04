@@ -2,7 +2,7 @@ import type {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
 import ConnectionCollection from './collection';
 import PageCollection from '../page/collection';
-import BookCollection from 'server/book/collection';
+import BookCollection from '../book/collection';
 
 /**
  * Checks if a connection with connectionId is req.params exists

@@ -1,6 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
-import PageCollection from 'server/page/collection';
-import PageModel from 'server/page/model';
+import PageCollection from '../page/collection';
+import PageModel from '../page/model';
 import type {Book} from './model';
 import BookModel from './model';
 

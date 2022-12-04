@@ -6,7 +6,7 @@ import * as userValidator from '../user/middleware';
 import * as util from './util';
 import * as pageUtil from '../page/util';
 import BookModel from './model';
-import PageCollection from 'server/page/collection';
+import PageCollection from '../page/collection';
 
 const router = express.Router();
 
@@ -160,3 +160,4 @@ router.patch(
 // );
 
 // export {router as bookRouter};
+export {router as bookRouter};

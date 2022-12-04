@@ -2,7 +2,7 @@ import type {HydratedDocument} from 'mongoose';
 import moment from 'moment';
 import type {Book} from './model';
 import BookCollection from './collection';
-import UserCollection from 'server/user/collection';
+import UserCollection from '../user/collection';
 
 // Update this if you add a property to the Book type!
 type BookResponse = {
