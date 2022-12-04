@@ -1,4 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
+import PageCollection from 'server/page/collection';
+import PageModel from 'server/page/model';
 import type {Book} from './model';
 import BookModel from './model';
 
@@ -68,7 +70,8 @@ class BookCollection {
     }
 
     if (bookDetails.changingFirstPage) {
-      book.firstPage = bookDetails.firstPage;
+      const page = await PageCollection.findOneByPageId(bookDetails.firstPage);
+      book.firstPage = page._id;
     }
 
     await book.save();

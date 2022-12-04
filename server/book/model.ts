@@ -1,5 +1,7 @@
 import {Types} from 'mongoose';
 import {Schema, model} from 'mongoose';
+import type {User} from '../user/model';
+import type {Page} from '../page/model';
 
 /**
  * This file defines the properties stored in a Book
@@ -12,9 +14,19 @@ export type Book = {
   author: Types.ObjectId; //user
   title: string;
   summary: string;
-  sharedWith: [Types.ObjectId]; //TODO: how to have set of users 
+  // sharedWith: [Types.ObjectId]; //TODO: how to have set of users 
   public: boolean;
-  firstPage: Types.ObjectId |string;
+  firstPage: Types.ObjectId;
+};
+
+export type PopulatedBook = {
+  _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
+  author: User; //user
+  title: string;
+  summary: string;
+  // sharedWith: [Page]; //TODO: how to have set of users 
+  public: boolean;
+  firstPage: Page;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -37,10 +49,10 @@ const BookSchema = new Schema({
     required: false
   },
   // A list of users who can see the book
-  sharedWith:{
-    type: Array<Types.ObjectId>,
-    required: false
-  },
+  // sharedWith:{
+  //   type: Array<Types.ObjectId>,
+  //   required: false
+  // },
   // Whether everybody can see book (else only users in sharedWith or author)
   public: {
     type: Boolean,
