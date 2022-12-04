@@ -1,32 +1,31 @@
-<!-- Reusable component allowing you to edit a page -->
-
-<!-- TODO: Rewrite this to make it a blockform. Would simplify formatting for now and could be styled later -->
-<template>
-  <form>
-    <label for="title">
-      Title
-      <input type="text">
-    </label>
-    <label for="">
-      Text
-      <input type="textarea">
-    </label>
-  </form>
-</template>
+<!-- Reusable component to edit a page -->
 
 <script>
+import BlockForm from '@/components/common/BlockForm.vue'
 
 export default {
-  name: 'PageEditorComponent',
+  name: 'PageEditor',
+  mixins: [BlockForm],
   props: {
     page: {
       type: Object,
       required: true
     }
   },
-  methods: {
-    
+  data () {
+    return {
+      url: `/api/page/${this.page._id}`,
+      method: 'PATCH',
+      hasBody: true,
+      fields: [
+        { id: 'title', label: 'Title', value: this.page.title },
+        { id: 'text', label: 'Text', value: this.page.text }
+      ],
+      title: 'Edit Page',
+      callback: () => {
+        this.$emit('updateSuccess')
+      }
+    }
   }
 }
-
 </script>

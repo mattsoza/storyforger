@@ -19,7 +19,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       title: this.book.title,
       description: this.book.description,
@@ -28,7 +28,7 @@ export default {
     }
   },
   methods: {
-    editTitle(evt) {
+    editTitle (evt) {
       /**
        * Edits the title of the book
        */
