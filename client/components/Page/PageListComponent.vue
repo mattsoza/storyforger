@@ -1,15 +1,17 @@
 <!-- Component that displays all the pages of a book -->
 
 <template>
-  <ul>
-    <li
-    v-for="page in pages"
-    :key="page._id"
-    :page="page"
-    @click="(currentPage=page)"
-    >{{ page.title }}</li>
-  </ul>
-  <PageView :page="currentPage" />
+  <div>
+    <ul>
+      <li
+      v-for="page in pages"
+      :key="page._id"
+      :page="page"
+      @click="(currentPage=page)"
+      >{{ page.title }}</li>
+    </ul>
+    <PageView :page="currentPage" />
+  </div>
 </template>
 
 <script>
