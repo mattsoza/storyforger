@@ -16,13 +16,16 @@ class PageCollection {
   /**
    * Add a new page
    *
-   * @param {string} pagename - The pagename of the page
-   * @param {string} password - The password of the page
+   * @param {Types.ObjectId} bookId - The id of the book to add the page to
    * @return {Promise<HydratedDocument<Page>>} - The newly created page
    */
-  static async addOne(title: string, summary: string, author: Types.ObjectId|string): Promise<HydratedDocument<Page>> {
-    const dateCreated = new Date(); //TODO: delete if we don't add date aspect
-    const page = new PageModel({title, summary, author, public: false});
+  static async addOne(bookId: Types.ObjectId | String): Promise<HydratedDocument<Page>> {
+    const page = new PageModel({
+      title: 'New Page',
+      bookId: bookId,
+      text: '',
+      imageUrl: null
+    });
     await page.save(); // Saves page to MongoDB
     return page;
   }
@@ -31,32 +34,38 @@ class PageCollection {
    * Find a page by pageId.
    *
    * @param {string} pageId - The pageId of the page to find
-   * @return {Promise<HydratedDocument<Page>> | Promise<null>} - The page with the given pagename, if any
+   * @return {Promise<HydratedDocument<Page>> | Promise<null>} - The page with the given pageId, if any
    */
   static async findOneByPageId(pageId: Types.ObjectId | string): Promise<HydratedDocument<Page>> {
     return PageModel.findOne({_id: pageId});
   }
 
   /**
-   * Find all pages by authorId
+   * Find all pages by bookId
    * 
-   * @param {string} authorId - the userId of the person whose pages we are fetching
-   * @return {Promise<HydratedDocument<Page>[]> | Promise<[]>} - A list of pages by the given author, if any
+   * @param {string} bookId - the bookId of the book whose pages we are fetching
+   * @return {Promise<HydratedDocument<Page>[]> | Promise<[]>} - A list of pages in the given book, if any
    */
-  static async findAllByAuthorId(authorId: Types.ObjectId | string): Promise<Array<HydratedDocument<Page>>> {
-    return PageModel.find({authorId});
+  static async findAllByBookId(bookId: Types.ObjectId | string): Promise<Array<HydratedDocument<Page>>> {
+    return PageModel.find({bookId});
   }
 
   /**
    * Update page's information
    *
    * @param {string} pageId - The pageId of the page to update
-   * @param {Object} pageDetails - An object with the page's updated credentials
+   * @param {Object} pageDetails - An object with the page's updated details
    * @return {Promise<HydratedDocument<Page>>} - The updated page
    */
-  static async updateOne(pageId: Types.ObjectId | string, pageDetails: {title?: string; text?: string; public?:boolean; changingFirstPage?: boolean; firstPage?: Types.ObjectId|string}): Promise<HydratedDocument<Page>> {
-    //TODO: see if there's a more efficient way to update the first page
+  static async updateOne(
+    pageId: Types.ObjectId | string,
+    pageDetails: {
+      title?: string;
+      text?: string;
+      imageUrl?: string;
+    }): Promise<HydratedDocument<Page>> {
     const page = await PageModel.findOne({_id: pageId});
+
     if (pageDetails.title) {
       page.title = pageDetails.title;
     }
@@ -65,13 +74,9 @@ class PageCollection {
       page.text = pageDetails.text;
     }
 
-    // if (pageDetails.public) {
-    //     page.public = pageDetails.public;
-    // }
-
-    // if (pageDetails.changingFirstPage) {
-    //   page.firstPage = pageDetails.firstPage;
-    // }
+    if (pageDetails.imageUrl) {
+      page.imageUrl = pageDetails.imageUrl;
+    }
 
     await page.save();
     return page;
@@ -85,18 +90,18 @@ class PageCollection {
    */
   static async deleteOne(pageId: Types.ObjectId | string): Promise<boolean> {
     const page = await PageModel.deleteOne({_id: pageId});
-    return page !== null;
+    return page.deletedCount !== 0;
   }
 
   /**
    * Deletes all pages from author
    * 
-   * @param {string} authorId
-   * @return {Promise<Boolean>}
+   * @param {string} bookId - The bookId of pages to delete
+   * @return {Promise<number>} - The number of pages deleted
    */
-  static async deleteAllByAuthor(authorId: Types.ObjectId | string): Promise<boolean> {
-    const page = await PageModel.deleteMany({authorId});
-    return page !== null;
+  static async deleteAllByBookId(bookId: Types.ObjectId | string): Promise<number> {
+    const page = await PageModel.deleteMany({bookId: bookId});
+    return page.deletedCount;
   }
 }
 
