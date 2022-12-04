@@ -19,7 +19,7 @@ export default {
       ],
       title: 'Login',
       callback: () => {
-        this.$router.push({name: 'Home'});
+        this.$router.push({name: 'My Stories'});
       }
     }
   }
