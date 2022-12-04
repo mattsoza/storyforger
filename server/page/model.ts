@@ -12,44 +12,38 @@ import type {Book} from '../book/model';
 export type Page = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
   title: string;
+  bookId: Types.ObjectId;
   text: string;
-//   image: 
-  author: Types.ObjectId;
-  book: Types.ObjectId;
+  imageUrl: string;
 };
 
-export type PopulatedPage = {
-    _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
-  title: string;
-  text: string;
-  author: User;
-  book: Book;
-}
+// export type PopulatedPage = {
+//   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
+//   title: string;
+//   text: string;
+//   book: Book;
+// }
 
 // Mongoose schema definition for interfacing with a MongoDB table
 // Pages stored in this table will have these fields, with the
 // type given by the type property, inside MongoDB
 const PageSchema = new Schema({
-  // The page's parent
-  author: {
-    type: Schema.Types.ObjectId,
-    required: true
-  },
-  // The page's child
   title: {
     type: String,
     required: true
   },
-  // The connecting text
+  bookId: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
   text: {
     type: String,
     required: true
   },
-  // 
-  book: {
-    type: Schema.Types.ObjectId,
-    required: true
-  },
+  imageUrl: {
+    type: String,
+    required: false
+  }
 });
 
 const PageModel = model<Page>('Page', PageSchema);

@@ -21,6 +21,12 @@
       >
         Login
       </router-link>
+      <router-link
+        to="/image"
+        :class="{current: $route.name === 'Image Upload'}"
+      >
+        Image Upload
+      </router-link>
     </div>
     <section class="alerts">
       <article

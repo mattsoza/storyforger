@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import * as userValidator from '../server/user/middleware';
 import {userRouter} from '../server/user/router';
+import {pageRouter} from '../server/page/router';
 import MongoStore from 'connect-mongo';
 
 import { Session } from 'express-session'
@@ -52,10 +53,10 @@ app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 
 // Parse incoming requests with JSON payloads ('content-type: application/json' in header)
-app.use(express.json());
+app.use(express.json({limit: '4mb'}));
 
 // Parse incoming requests with urlencoded payloads ('content-type: application/x-www-form-urlencoded' in header)
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false, limit: '4mb'}));
 
 // Initialize cookie session
 // https://www.npmjs.com/package/express-session#options
@@ -76,6 +77,7 @@ app.use(userValidator.isCurrentSessionUserExists);
 
 // Add routers from routes folder
 app.use('/api/users', userRouter);
+app.use('/api/page', pageRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {
