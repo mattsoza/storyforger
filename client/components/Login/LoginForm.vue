@@ -14,8 +14,8 @@ export default {
       setUsername: true,
       hasBody: true,
       fields: [
-        {id: 'username', label: 'Username', value: ''},
-        {id: 'password', label: 'Password', value: ''}
+        { id: 'username', label: 'Username', value: '' },
+        { id: 'password', label: 'Password', value: '' }
       ],
       title: 'Login',
       callback: () => {

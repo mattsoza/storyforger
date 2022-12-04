@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    username: null
+    username: null,
+    books: [] // Initalized on sign-in
   },
   mutations: {
     setUsername(state, username) {
@@ -15,6 +16,11 @@ const store = new Vuex.Store({
         * @param username - new username to set
         */
       state.username = username;
+    },
+    async getBooks(state, books) {
+      const url ='/api/book';
+      const res = await fetch(url).then(async r => r.json());
+      state.books = res;
     }
   }
 })
