@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <button @click="(newBookDialog=true)">New book</button>
+    <button class="newBookButton" @click="(newBookDialog=true)">New book</button>
     <v-easy-dialog v-model="newBookDialog">
       <NewBookForm />
     </v-easy-dialog>
@@ -61,5 +61,11 @@ export default {
   background-color: white;
   padding: 10px;
   border-radius: 10px;
+}
+
+.newBookButton {
+  font-size: 1.4em;
+  min-width: 20vw;
+  padding: .4em;
 }
 </style>

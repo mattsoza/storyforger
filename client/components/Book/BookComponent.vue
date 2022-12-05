@@ -1,7 +1,7 @@
 <!-- Reusable component that displays a book, it's title, and gives the ability to open editing mode -->
 
 <template>
-  <div @click="storeBook">
+  <div class="bookCard" @click="storeBook">
     <h1>{{ title }}</h1>
     <h2>{{ description }}</h2>
     <button @click="editBook">Edit Book</button>
@@ -46,7 +46,7 @@ export default {
       fetch(`/api/book/${this.bookId}`, params)
         .then((res) => {})
     },
-    editBook() {
+    editBook () {
       this.$store.commit('setCurrentBook', this.book);
       this.$router.push({ name: 'Story' });
     },
@@ -62,13 +62,30 @@ export default {
       await fetch(`/api/book/${this.bookId}`, params)
         .then((res) => { res.json() })
         .then((data) => { console.log(data) })
-      
-      this.$store.commit('getBooks');
+
+      this.$store.commit('getBooks')
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+div.bookCard {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 1em 1em;
+  margin: 2em;
+  max-width: 20vw;
+}
+
+div.bookCard>h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+div.bookCard>h2 {
+  font-size: 1.2rem;
+  font-weight: normal;
+}
 
 </style>

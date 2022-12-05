@@ -1,9 +1,9 @@
 <!-- Page for displaying all the books that a user has created -->
 
 <template>
-  <div>
-    <NewBookComponent />
-    <BookComponent 
+  <div class="bookPage">
+    <NewBookComponent class="newBookButton" />
+    <BookComponent
       v-for="book in $store.state.books"
       :key="book._id"
       :book="book"
@@ -31,3 +31,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.bookPage {
+  display: flex;
+}
+</style>
