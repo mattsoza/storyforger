@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      currentPage: null
+      currentPage: this.pages.filter(page => page._id == this.$store.state.currentBook.firstPage)[0]
     }
   }
 }
