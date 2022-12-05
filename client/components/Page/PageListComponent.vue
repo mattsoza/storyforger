@@ -10,7 +10,7 @@
       @click="(currentPage=page)"
       >{{ page.title }}</li>
     </ul>
-    <PageView v-if="currentPage" :page="currentPage" />
+    <PageView v-if="currentPage" :page="currentPage"  :pages="pages"/>
   </div>
 </template>
 

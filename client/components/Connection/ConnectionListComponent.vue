@@ -3,7 +3,10 @@
 <template>
     <div>
       <ul>
-        Current Connections
+        You're in the Connection List Component
+        <div>
+        Here's the list:
+        
         <li
         v-for="connection in connections"
         :key="connection._id"
@@ -11,24 +14,43 @@
         > <ConnectionComponent 
             :connection="connection"
         /></li>
+      </div>
+        <div>
+        Here's where to add a new Connection:
+
+
+        <NewConnectionForm
+        :page="page" :pages="pages"/>
+      </div>
+
+      <div>
+
+        wour pages: {{pages}}
+
+      </div>
       </ul>
     </div>
   </template>
   
   <script>
   import ConnectionComponent from './ConnectionComponent.vue'
+import NewConnectionForm from './NewConnectionForm.vue';
   
   export default {
     name: 'ConnectionListComponent',
     components: {
-      ConnectionComponent
-    },
+    ConnectionComponent,
+    NewConnectionForm
+},
     props: {
-      // The array containing all the page objects. Calculated upon opening book?
       page: {
         type: Object,
         required: true
-      }
+      },
+      pages: {
+          type: Array,
+          required: true
+        }
     },
     data () {
       return {

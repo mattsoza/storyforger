@@ -4,11 +4,14 @@
 
 <template>
 <div @pageChange="pageChange">
-    We're viewing PagePage!
-  
-    We have {{book}} which has pages: {{book.pages}}
+
+    Welcome to Page.Page. Current Page is {{this.currentPage}}.
+
+    Page List:
     <PageListComponent :pages="book.pages"/>
-    <ConnectionListComponent :page="currentPage"/>
+
+    End of Page List Component.
+
     <button @click = newPage> New Page</button>
   </div>
 </template>
@@ -26,7 +29,7 @@ export default {
   data () {
     return {
       book: this.$store.state.currentBook,
-      currentPage: this.$store.state.currentPage
+      // currentPage: this.$store.state.currentPage
     }
   },
   mounted() {
@@ -51,11 +54,11 @@ export default {
                 console.log(res);
                 throw new Error(res.error);
       }
-      // const ahhh = await json(response);
-      // console.log(ahhh);
+
       const page = await response.text();
-      this.currentPage =JSON.parse(page);
-      console.log("newly fetched page: ", this.currentPage);
+      newPage =JSON.parse(page);
+      //TODO: update current page and also book
+      // console.log("newly fetched page: ", this.currentPage);
 
     },
 

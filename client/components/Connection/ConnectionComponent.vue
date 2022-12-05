@@ -1,5 +1,3 @@
-<!-- Reusable component that displays a book, it's title, and gives the ability to open editing mode -->
-
 <template>
     <div>{{connection.text}}
         <div>{{this.child}}</div>
