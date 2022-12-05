@@ -3,6 +3,8 @@ import moment from 'moment';
 import type {Book} from './model';
 import BookCollection from './collection';
 import UserCollection from '../user/collection';
+import {constructPageResponse, PageResponse} from '../page/util';
+import PageCollection from '../page/collection';
 
 // Update this if you add a property to the Book type!
 type BookResponse = {
@@ -13,6 +15,7 @@ type BookResponse = {
 //   sharedWith: [string]; //TODO: how to have set of users 
   public: boolean;
   firstPage: string;
+  pages: PageResponse[];
 };
 
 /**
@@ -23,7 +26,7 @@ type BookResponse = {
  * @param {HydratedDocument<Book>} book - A book object
  * @returns {BookResponse} - The book object without the password
  */
-const constructBookResponse = (book: HydratedDocument<Book>): BookResponse => {
+const constructBookResponse = async (book: HydratedDocument<Book>): Promise<BookResponse> => {
   const bookCopy: Book = {
     ...book.toObject({
       versionKey: false // Cosmetics; prevents returning of __v property
@@ -37,13 +40,21 @@ const constructBookResponse = (book: HydratedDocument<Book>): BookResponse => {
 
   const firstPage = bookCopy.firstPage as unknown as string;
 
+  const pages = await PageCollection.findAllByBookId(book._id);
+
+  const pageResponses = [];
+  for (const page of pages) {
+    pageResponses.push(await constructPageResponse(page));
+  }
+
   // delete bookCopy.sharedWith;
   delete bookCopy.firstPage
   return {
     ...bookCopy,
     _id: bookCopy._id.toString(),
     author: bookCopy.author.toString(),
-    firstPage
+    firstPage,
+    pages: pageResponses
   };
 };
 

@@ -38,7 +38,10 @@ router.get(
     //if user is logged in, list all books made by user
     //TODO
     const books = await BookCollection.findAllByAuthorId(user);
-    const response = books.map(util.constructBookResponse);
+    var response = [];
+    for (const book of books) {
+      response.push(await util.constructBookResponse(book));
+    }
     res.status(200).json(response);
     
   },

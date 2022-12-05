@@ -64,5 +64,6 @@ const s3 = new Aws.S3({
 export {
     upload,
     s3,
-    constructPageResponse
+    constructPageResponse,
+    PageResponse
 };
