@@ -15,11 +15,13 @@ export default {
   data () {
     return {
       url: `/api/page/${this.page._id}`,
+      previewImage: null,
       method: 'PATCH',
       hasBody: true,
       fields: [
         { id: 'title', label: 'Title', value: this.page.title },
-        { id: 'text', label: 'Text', value: this.page.text }
+        { id: 'text', label: 'Text', value: this.page.text },
+        { id: 'image', label: 'Upload Image', value: this.page.image }
       ],
       title: 'Edit Page',
       callback: () => {
