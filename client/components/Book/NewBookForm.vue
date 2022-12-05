@@ -14,11 +14,12 @@ export default {
       hasBody: true,
       fields: [
         { id: 'title', label: 'Title', value: '' },
-        { id: 'description', label: 'description', value: '' }
+        { id: 'summary', label: 'Summary (optional)', value: '' }
       ],
       title: 'New Book',
       callback: () => {
-        this.$router.push({ name: 'My Stories' })
+        this.$router.push({ name: 'My Stories' });
+        this.$store.commit('getBooks');
       }
     }
   }

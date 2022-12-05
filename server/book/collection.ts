@@ -44,7 +44,7 @@ class BookCollection {
    * @return {Promise<HydratedDocument<Book>[]> | Promise<[]>} - A list of books by the given author, if any
    */
   static async findAllByAuthorId(authorId: Types.ObjectId | string): Promise<Array<HydratedDocument<Book>>> {
-    return BookModel.find({authorId});
+    return BookModel.find({author: authorId});
   }
 
   /**

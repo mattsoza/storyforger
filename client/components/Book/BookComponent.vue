@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       title: this.book.title,
-      description: this.book.description,
+      description: this.book.summary,
       bookId: this.book._id,
       editing: false
     }
@@ -46,7 +46,7 @@ export default {
       fetch(`/api/book/${this.bookId}`, params)
         .then((res) => {})
     },
-    deleteBook (evt) {
+    async deleteBook (evt) {
       /**
        * Deletes this book from the user's account
        */
@@ -55,9 +55,11 @@ export default {
         headers: { 'Content-Type': 'application/json' }
       }
 
-      fetch(`/api/book/${this.bookId}`, params)
+      await fetch(`/api/book/${this.bookId}`, params)
         .then((res) => { res.json() })
         .then((data) => { console.log(data) })
+      
+      this.$store.commit('getBooks');
     }
   }
 }

@@ -23,7 +23,7 @@ type BookResponse = {
  * @param {HydratedDocument<Book>} book - A book object
  * @returns {BookResponse} - The book object without the password
  */
-const constructBookResponse = async (book: HydratedDocument<Book>): Promise<BookResponse> => {
+const constructBookResponse = (book: HydratedDocument<Book>): BookResponse => {
   const bookCopy: Book = {
     ...book.toObject({
       versionKey: false // Cosmetics; prevents returning of __v property
@@ -31,9 +31,9 @@ const constructBookResponse = async (book: HydratedDocument<Book>): Promise<Book
   };
 
   //TODO
-  const author = await UserCollection.findOneByUserId(bookCopy.author);
-  const username = author.username;
-  delete bookCopy.author;
+  // const author = await UserCollection.findOneByUserId(bookCopy.author);
+  // const username = author.username;
+  // delete bookCopy.author;
 
   const firstPage = bookCopy.firstPage as unknown as string;
 
@@ -42,7 +42,7 @@ const constructBookResponse = async (book: HydratedDocument<Book>): Promise<Book
   return {
     ...bookCopy,
     _id: bookCopy._id.toString(),
-    author: username,
+    author: bookCopy.author.toString(),
     firstPage
   };
 };

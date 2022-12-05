@@ -18,7 +18,7 @@ const store = new Vuex.Store({
         */
       state.username = username;
     },
-    async getBooks(state, books) {
+    async getBooks(state) {
       const url ='/api/book';
       const res = await fetch(url).then(async r => r.json());
       state.books = res;

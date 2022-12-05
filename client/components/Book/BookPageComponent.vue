@@ -25,6 +25,9 @@ export default {
     return {
       placeholder: 'test'
     }
+  },
+  async mounted() {
+    this.$store.commit('getBooks');
   }
 }
 </script>

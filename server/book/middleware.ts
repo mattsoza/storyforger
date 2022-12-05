@@ -12,6 +12,7 @@ const isBookExists = async (req: Request, res: Response, next: NextFunction) => 
     const validFormat = Types.ObjectId.isValid(bookId as string);
     const book = validFormat ? await BookCollection.findOneByBookId(bookId as string) : '';
     if (!book) {
+      console.log("does not exist");
       res.status(404).json({
         error: {
           bookNotFound: `Book with book ID ${req.params.bookId} does not exist.`
@@ -54,21 +55,19 @@ const isAuthorizedReader = async (req: Request, res: Response, next: NextFunctio
     };
 
 const isBookAuthor = async (req: Request, res: Response, next: NextFunction) => {
-    const bookId = req.query.bookId ? req.query.bookId : req.params.bookId;
-    const authorId = req.session.userId;
-    const author = await UserCollection.findOneByUserId(authorId);
-    const book = await BookCollection.findOneByBookId(bookId as string);
-    if (book.author._id !== author._id){ 
-        res.status(404).json({
-            error: {
-              inValidUser: `Logged in User is NOT the author of the book.`
-            }
-          });
-          return;
-    }
+  const bookId = req.query.bookId ? req.query.bookId : req.params.bookId;
+  const book = await BookCollection.findOneByBookId(bookId as string);
+  if (book.author.toString() != req.session.userId) {
+    res.status(404).json({
+      error: {
+        inValidUser: `Logged in User is NOT the author of the book.`
+      }
+    });
+    return;
+  }
 
-      next();
-    };
+  next();
+};
 
 
 

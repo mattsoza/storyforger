@@ -38,7 +38,7 @@ router.get(
     //if user is logged in, list all books made by user
     //TODO
     const books = await BookCollection.findAllByAuthorId(user);
-    const response = await books.map(util.constructBookResponse);
+    const response = books.map(util.constructBookResponse);
     res.status(200).json(response);
     
   },
@@ -87,19 +87,20 @@ router.post(
 /**
  * Delete a book
  *
- * @name DELETE /api/book/session
+ * @name DELETE /api/book/:bookId
  *
  * @return - None
- * @throws {403} - If book is not logged in
+ * @throws {403} - If bookId does not exist
  *
  */
 router.delete(
-  '/bookId',
+  '/:bookId',
   [
-    bookValidator.isBookAuthor,
-    bookValidator.isBookExists
+    bookValidator.isBookExists,
+    bookValidator.isBookAuthor
   ],
   async (req: Request, res: Response) => {
+    console.log("deleting book");
     const bookId = req.query.bookId ? req.query.bookId : req.params.bookId;
     const deleted = await BookCollection.deleteOne(bookId as string);
     if (!deleted){
@@ -109,7 +110,7 @@ router.delete(
         return;
     }
     res.status(200).json({
-      message: 'You have been logged out successfully.'
+      message: 'Book deleted.'
     });
   }
 );
