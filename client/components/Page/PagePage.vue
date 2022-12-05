@@ -20,6 +20,10 @@ export default {
       currentPage: null
     }
   },
+  mounted() {
+    this.book = this.$store.state.currentBook;
+    console.log(this.$store.state.currentBook);
+  },
   methods: {
     pageChange () {
 
