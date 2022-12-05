@@ -82,7 +82,7 @@ app.use(userValidator.isCurrentSessionUserExists);
 app.use('/api/users', userRouter);
 app.use('/api/page', pageRouter);
 app.use('/api/book', bookRouter);
-app.use('api/connection', connectionRouter);
+app.use('/api/connection', connectionRouter);
 
 
 // Catch all the other routes and display error message

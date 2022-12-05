@@ -14,7 +14,7 @@ router.get(
     const page = await PageCollection.findOneByPageId(req.params.pageId);
     res.status(200).json({
       message: 'Page found.',
-      page: page
+      page: await util.constructPageResponse(page)
     });
   }
 );
@@ -29,7 +29,7 @@ router.post(
 
     res.status(200).json({
       message: 'Page created.',
-      page: page
+      page: await util.constructPageResponse(page)
     });
   }
 );
@@ -78,7 +78,7 @@ router.patch(
     const page = await PageCollection.updateOne(req.params.pageId, pageDetails);
     res.status(200).json({
       message: 'Page updated.',
-      page: page
+      page: await util.constructPageResponse(page)
     });
   }
 );

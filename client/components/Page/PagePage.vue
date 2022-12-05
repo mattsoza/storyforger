@@ -5,14 +5,12 @@
 <template>
 <div @pageChange="pageChange">
 
-    Welcome to Page.Page. Current Page is {{this.currentPage}}.
+    <p>Welcome to PagePage.</p>
 
-    Page List:
+    <h2>Page List</h2>
     <PageListComponent :pages="book.pages"/>
 
-    End of Page List Component.
-
-    <button @click = newPage> New Page</button>
+    <button @click="newPage">New Page</button>
   </div>
 </template>
 
@@ -41,12 +39,8 @@ export default {
 
     },
     async newPage(){
-      console.log("got to newpage function");
-      console.log(this.book._id);
       const fields = {bookId: this.book._id};
       const response = await fetch(`/api/page/${this.book._id}`, {method: 'POST', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}});
-
-      console.log("response", response);
 
       if (!response.ok) {
                 console.log("okay");
@@ -55,10 +49,8 @@ export default {
                 throw new Error(res.error);
       }
 
-      const page = await response.text();
-      newPage =JSON.parse(page);
-      //TODO: update current page and also book
-      // console.log("newly fetched page: ", this.currentPage);
+      const page = (await response.json()).page;
+      this.book.pages.push(page);
 
     },
 
