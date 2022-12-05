@@ -37,3 +37,12 @@ export default {
 }
 
 </script>
+
+<style>
+ul>li {
+  border: 1px solid black;
+}
+ul>li:hover {
+  background-color: #bbbbbb;
+}
+</style>

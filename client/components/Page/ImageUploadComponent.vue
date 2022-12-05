@@ -8,37 +8,35 @@
 
 <script>
 export default {
-  name:'ImageUploadComponent',
-  data(){
+  name: 'ImageUploadComponent',
+  data () {
     return {
       previewImage: null
     }
   },
   methods: {
-    uploadImage(e){
-      const image = e.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onload = e =>{
-          this.previewImage = e.target.result;
-          // console.log(this.previewImage);
+    uploadImage (e) {
+      const image = e.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(image)
+      reader.onload = e => {
+        this.previewImage = e.target.result
+        // console.log(this.previewImage);
       };
     },
-    async sendToServer() {
-      const body = JSON.stringify({image: this.previewImage});
-      console.log(body);
+    async sendToServer () {
+      const body = JSON.stringify({ image: this.previewImage })
+      console.log(body)
       const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: body
-        }
+      }
       // const response = await fetch(`/api/page/images/upload`, requestOptions);
     }
   }
 }
 </script>
-
-
 
 <style>
 .uploading-image{

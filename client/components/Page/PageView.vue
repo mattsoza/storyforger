@@ -5,7 +5,7 @@
   <h2>{{ page.title }}</h2>
   <p>{{ page.text }}</p>
   <button @click="(visible=true)">Edit Title/description</button>
-  <v-easy-dialog model="visible" @updateSuccess="(visible=false)">
+  <v-easy-dialog v-model="visible" @updateSuccess="(visible=false)">
     <PageEditor :page="this.page" />
   </v-easy-dialog>
   <router-link class="routerlink" to="/story">Edit Book</router-link>
@@ -26,6 +26,11 @@ export default {
     page: {
       type: Object,
       required: true
+    }
+  },
+  data () {
+    return {
+      visible: false
     }
   },
   methods: {
