@@ -99,6 +99,7 @@ const isUsernameNotAlreadyInUse = async (req: Request, res: Response, next: Next
  * Checks if the user is logged in, that is, whether the userId is set in session
  */
 const isUserLoggedIn = (req: Request, res: Response, next: NextFunction) => {
+  console.log("in isuserloggedin");
   if (!req.session.userId) {
     res.status(403).json({
       error: 'You must be logged in to complete this action.'

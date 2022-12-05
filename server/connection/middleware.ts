@@ -92,6 +92,7 @@ const isValidPage = async (req: Request, res: Response, next: NextFunction) => {
 
 
 const isValidParentChildPage = async (req: Request, res: Response, next: NextFunction) => {
+  console.log("in isvalidparentchildpage");
   const parentId = req.body.parent;
   const childId = req.body.child;
   const parentPage =  await PageCollection.findOneByPageId(parentId as string);

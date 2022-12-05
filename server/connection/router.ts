@@ -4,6 +4,7 @@ import ConnectionCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as connectionValidator from '../connection/middleware';
 import * as util from './util';
+import PageCollection from '../page/collection';
 
 const router = express.Router();
 
@@ -84,14 +85,18 @@ router.post(
   '/',
   [
     userValidator.isUserLoggedIn,
-    connectionValidator.isValidParentChildPage
+    // connectionValidator.isValidParentChildPage
   ],
   async (req: Request, res: Response) => {
+    console.log("you're posting!!!!")
     const parentId = req.body.parent;
     const childId = req.body.child;
     const text = req.body.text;
     const author = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const connection = await ConnectionCollection.addOne(parentId, childId, text, author);
+    const parent = await PageCollection.findOneByPageId(parentId);
+    const bookId = parent.bookId;
+    console.log(" the four things youre adding with", parentId, childId, text, author, bookId, "done");
+    const connection = await ConnectionCollection.addOne(parentId, childId, text, author, bookId);
 
     res.status(201).json({
       message: 'Your connection was created successfully.',
