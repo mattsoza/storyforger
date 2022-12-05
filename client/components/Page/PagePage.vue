@@ -40,9 +40,10 @@ export default {
     async newPage(){
       console.log("got to newpage function");
       console.log(this.book._id);
-      const response = await fetch(`/api/page/${this.book._id}`);
+      const fields = {bookId: this.book._id};
+      const response = await fetch(`/api/page/${this.book._id}`, {method: 'POST', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}});
 
-      console.log(response);
+      console.log("response", response);
 
       if (!response.ok) {
                 console.log("okay");
@@ -50,11 +51,15 @@ export default {
                 console.log(res);
                 throw new Error(res.error);
       }
-
+      // const ahhh = await json(response);
+      // console.log(ahhh);
       const page = await response.text();
       this.currentPage =JSON.parse(page);
+      console.log("newly fetched page: ", this.currentPage);
 
-    }
+    },
+
+    
   }
 }
 </script>
