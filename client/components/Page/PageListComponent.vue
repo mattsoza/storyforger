@@ -10,7 +10,7 @@
       @click="(currentPage=page)"
       >{{ page.title }}</li>
     </ul>
-    <PageView v-if="currentPage" :page="currentPage" />
+    <PageView v-if="currentPage" :page="currentPage"  :pages="pages"/>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      currentPage: null
+      currentPage: this.pages.filter(page => page._id == this.$store.state.currentBook.firstPage)[0]
     }
   }
 }

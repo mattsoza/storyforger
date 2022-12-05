@@ -4,27 +4,36 @@
 <div>
   <h2>{{ page.title }}</h2>
   <p>{{ page.text }}</p>
-  <button @click="(visible=true)">Edit Title/description</button>
-  <v-easy-dialog v-model="visible" @updateSuccess="(visible=false)">
-    <PageEditor :page="this.page" />
+  <button @click="openEdit">Edit Page</button>
+  <v-easy-dialog v-model="visible">
+    <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
   </v-easy-dialog>
-  <router-link class="routerlink" to="/story">Edit Book</router-link>
+  <!-- <router-link class="routerlink" to="/story">Edit Book</router-link> -->
+
+  <ConnectionListComponent :page="page" :pages="pages" />
+
 </div>
 </template>
 
 <script>
 import VEasyDialog from 'v-easy-dialog'
 import PageEditor from '@/components/Page/PageEditor.vue'
+import ConnectionListComponent from '../Connection/ConnectionListComponent.vue'
 
 export default {
   name: 'PageView',
   components: {
     VEasyDialog,
-    PageEditor
+    PageEditor,
+    ConnectionListComponent
   },
   props: {
     page: {
       type: Object,
+      required: true
+    },
+    pages: {
+      type: Array,
       required: true
     }
   },
@@ -34,8 +43,11 @@ export default {
     }
   },
   methods: {
-    openEdit () {
-
+    openEdit() {
+      this.visible = true;
+    },
+    closeEdit() {
+      this.visible = false;
     }
   }
 }
