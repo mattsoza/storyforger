@@ -4,7 +4,7 @@
   <div @click="storeBook">
     <h1>{{ title }}</h1>
     <h2>{{ description }}</h2>
-    <router-link class="routelink" to='/story'>Edit Book</router-link>
+    <button @click="editBook">Edit Book</button>
     <button @click="deleteBook">Delete</button>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
       /**
        * Updates the current book in vuex
        */
-      this.$store.commit('setCurrentBook', this.book)
+      // this.$store.commit('setCurrentBook', this.book)
     },
     editTitle (evt) {
       /**
@@ -45,6 +45,10 @@ export default {
 
       fetch(`/api/book/${this.bookId}`, params)
         .then((res) => {})
+    },
+    editBook() {
+      this.$store.commit('setCurrentBook', this.book);
+      this.$router.push({ name: 'Story' });
     },
     async deleteBook (evt) {
       /**

@@ -4,6 +4,9 @@
 
 <script>
 export default {
-    name: 'HomePage'
+    name: 'HomePage',
+    mounted() {
+      this.$router.push({ name: 'My Stories' });
+    }
 }
 </script>

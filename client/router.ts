@@ -32,13 +32,15 @@ router.beforeEach((to, from, next) => {
       next({name: 'My Stories'}); // Go to Account page if user navigates to Login and are signed in
       return;
     }
-    if ((to.name === 'Account' || to.name === 'My Stories') && !router.app.$store.state.username) {
+    if ((to.name === 'Home' || to.name === 'Account' || to.name === 'My Stories') && !router.app.$store.state.username) {
       next({name: 'Login'}); // Go to Login page if user navigates to Account and are not signed in
       return;
     }
     if (to.name === 'Story') {
+      console.log("trying story");
       if (!router.app.$store.state.currentBook) {
-        next({name: 'MyStories'})
+        console.log("no current book");
+        next({name: 'My Stories'})
       } else {
         null
       }

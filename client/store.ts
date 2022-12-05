@@ -24,7 +24,7 @@ const store = new Vuex.Store({
       state.books = res;
     },
     setCurrentBook(state, book) {
-      
+      state.currentBook = book;
     }
   }
 })
