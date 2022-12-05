@@ -80,9 +80,9 @@ app.use(userValidator.isCurrentSessionUserExists);
 
 // Add routers from routes folder
 app.use('/api/users', userRouter);
-app.use('/api/pages', pageRouter);
-app.use('/api/books', bookRouter);
-app.use('api/connections', connectionRouter);
+app.use('/api/page', pageRouter);
+app.use('/api/book', bookRouter);
+app.use('api/connection', connectionRouter);
 
 
 // Catch all the other routes and display error message

@@ -10,11 +10,11 @@ const router = express.Router();
 
 
 /**
- *  `GET /api/connections/?bookId=bookId` - Get all connections in book
- * `GET /api/connections/?pageId=pageId` - Get all outgoing connections
- * `GET /api/connections/:connectionId` - Get specific connection
+ *  `GET /api/connection/?bookId=bookId` - Get all connections in book
+ * `GET /api/connection/?pageId=pageId` - Get all outgoing connections
+ * `GET /api/connection/:connectionId` - Get specific connection
  *
- * @name GET /api/connections
+ * @name GET /api/connection
  *
  * @return {ConnectionResponse[]} - A list of all the connections sorted in descending
  *                      order by date modified
@@ -70,7 +70,7 @@ router.get(
 /**
  * Create a new connection.
  *
- * @name POST /api/connections
+ * @name POST /api/connection
  *
  * @body {string} parent - pageId
  * @body {string} child - pageId
@@ -103,7 +103,7 @@ router.post(
 /**
  * Delete a connection
  *
- * @name DELETE /api/connections/:id
+ * @name DELETE /api/connection/:id
  *
  * @param {string} - connectionId
  * @return {string} - A success message
@@ -129,7 +129,7 @@ router.delete(
 /**
  * Modify a connection
  *
- * @name PATCH /api/connections/:id
+ * @name PATCH /api/connection/:id
  *
  * @body connectionDetails {text?: string, child?: string}
  * @return {ConnectionResponse} - the updated connection

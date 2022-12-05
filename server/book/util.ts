@@ -35,7 +35,7 @@ const constructBookResponse = async (book: HydratedDocument<Book>): Promise<Book
   const username = author.username;
   delete bookCopy.author;
 
-  const firstPage = bookCopy.firstPage._id as unknown as string;
+  const firstPage = bookCopy.firstPage as unknown as string;
 
   // delete bookCopy.sharedWith;
   delete bookCopy.firstPage

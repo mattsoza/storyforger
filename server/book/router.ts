@@ -13,14 +13,14 @@ const router = express.Router();
 /**
  * Get a list of all books
  *
- * @name GET /api/books
+ * @name GET /api/book
  *
  * @return - 
  */
 /**
  * Get a single book
  * 
- * @name Get /api/books/bookId
+ * @name Get /api/book/bookId
  * 
  * @return - single book object
  */
@@ -58,7 +58,7 @@ router.get(
 /**
  * Create New Book
  *
- * @name POST /api/books
+ * @name POST /api/book
  *
  * @param {string} title - The book's summary
  * @param {string} summary - The book's summary
@@ -87,7 +87,7 @@ router.post(
 /**
  * Delete a book
  *
- * @name DELETE /api/books/session
+ * @name DELETE /api/book/session
  *
  * @return - None
  * @throws {403} - If book is not logged in
@@ -118,7 +118,7 @@ router.delete(
 /**
  * Update a book's profile.
  *
- * @name PATCH /api/books
+ * @name PATCH /api/book
  *
  * @param {string} bookId -
  * @param {string?} title?
@@ -146,7 +146,7 @@ router.patch(
 // /**
 //  * Gets the bookId of a book if they exist, or null if they don't
 //  *
-//  * @name GET /api/books/:bookname
+//  * @name GET /api/book/:bookname
 //  *
 //  * @return {ObjectId} - The bookId of a book if they exist, or null if they don't
 //  */
