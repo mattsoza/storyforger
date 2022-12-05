@@ -37,9 +37,7 @@ router.beforeEach((to, from, next) => {
       return;
     }
     if (to.name === 'Story') {
-      console.log("trying story");
       if (!router.app.$store.state.currentBook) {
-        console.log("no current book");
         next({name: 'My Stories'})
       } else {
         null
