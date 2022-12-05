@@ -21,7 +21,7 @@ export default {
         { id: 'title', label: 'Title', value: this.page.title },
         { id: 'text', label: 'Text', value: this.page.text }
       ],
-      title: 'Edit Page',
+      title: 'Save',
       callback: () => {
         this.$emit('updateSuccess')
       }
