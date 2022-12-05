@@ -51,8 +51,7 @@ router.patch(
     util.upload.single('image')
   ],
   async (req: Request, res: Response) => {
-    console.log(req.body);
-    var imageUrl: string = null;
+    let imageUrl: string = null;
     if (req.body.image) {
       const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
@@ -71,7 +70,6 @@ router.patch(
         imageUrl = data.Location;
       });
     }
-
     const pageDetails = {
       title: req.body.title,
       text: req.body.text,

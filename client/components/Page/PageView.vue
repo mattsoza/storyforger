@@ -3,6 +3,9 @@
 <template>
 <div>
   <h2>{{ page.title }}</h2>
+  <img
+    v-if="page.imageUrl"
+    :src="page.imageUrl" height="300">
   <p>{{ page.text }}</p>
   <button @click="openEdit">Edit Page</button>
   <v-easy-dialog v-model="visible">
