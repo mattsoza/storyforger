@@ -22,7 +22,7 @@ export default {
       reader.onload = e => {
         this.previewImage = e.target.result
         // console.log(this.previewImage);
-      };
+      }
     },
     async sendToServer () {
       const body = JSON.stringify({ image: this.previewImage })
@@ -32,7 +32,7 @@ export default {
         headers: { 'Content-Type': 'application/json' },
         body: body
       }
-      // const response = await fetch(`/api/page/images/upload`, requestOptions);
+      const response = await fetch(`/api/page/638d5a2be0c981e4ac7052ce`, requestOptions);
     }
   }
 }

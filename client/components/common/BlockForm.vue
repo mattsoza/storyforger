@@ -18,7 +18,7 @@
           :value="field.value"
           @input="field.value = $event.target.value"
         />
-        <input 
+        <input
           v-else-if="field.id === 'tag'"
           pattern="[a-z]*"
           placeholder="ex: boston"
@@ -26,6 +26,14 @@
           :value="field.value"
           @input="field.value = $event.target.value"
         >
+        <input
+          v-else-if="field.id === 'image'"
+          type="file"
+          accept="image/jpeg"
+          :name="field.id"
+          :value="field.value"
+          @change="uploadImage"
+        > <!-- @input="(field.value=$event.target.value)" -->
         <input
           v-else
           :type="field.id === 'password' ? 'password' : 'text'"
@@ -74,26 +82,40 @@ export default {
     };
   },
   methods: {
-    async submit() {
+    uploadImage (e) {
+      const image = e.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(image)
+      reader.onload = e => {
+        this.previewImage = e.target.result
+        // console.log(this.previewImage);
+      }
+    },
+    async submit () {
       /**
         * Submits a form with the specified options from data().
         */
       const options = {
         method: this.method,
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin' // Sends express-session credentials with request
-      };
+      }
       if (this.hasBody) {
         options.body = JSON.stringify(Object.fromEntries(
           this.fields.map(field => {
-            const {id, value} = field;
-            field.value = '';
-            return [id, value];
+            if (field.id === 'image') {
+              return [field.id, this.previewImage]
+            } else {
+              const { id, value } = field
+              field.value = ''
+              return [id, value]
+            }
           })
-        ));
+        ))
       }
 
       try {
+        console.log(options.body)
         const r = await fetch(this.url, options);
         if (!r.ok) {
           // If response is not okay, we throw an error and enter the catch block

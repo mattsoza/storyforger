@@ -51,6 +51,7 @@ router.patch(
     util.upload.single('image')
   ],
   async (req: Request, res: Response) => {
+    console.log(req.body);
     var imageUrl: string = null;
     if (req.body.image) {
       const params = {
