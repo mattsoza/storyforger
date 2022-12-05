@@ -9,13 +9,6 @@
       <p v-if="$store.state.username"> {{$store.state.username}}</p>
       <router-link
         v-if="$store.state.username"
-        to="/my-stories"
-        :class="{current: $route.name === 'My Stories'}"
-      >
-        My Stories
-      </router-link>
-      <router-link
-        v-if="$store.state.username"
         to="/account"
         :class="{current: $route.name === 'Account'}"
       >

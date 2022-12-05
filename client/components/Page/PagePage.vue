@@ -1,23 +1,32 @@
 <!-- Webpage containing all the page elements; the PagePage! :P -->
+<!-- Webpage containing all the page elements; the PagePage! :P -->
+
 
 <template>
 <div @pageChange="pageChange">
-  <PageListComponent :pages="book.pages"/>
-</div>
+    We're viewing PagePage!
+  
+    We have {{book}} which has pages: {{book.pages}}
+    <PageListComponent :pages="book.pages"/>
+    <ConnectionListComponent :page="currentPage"/>
+    <button @click = newPage> New Page</button>
+  </div>
 </template>
 
 <script>
 import PageListComponent from './PageListComponent.vue'
+import ConnectionListComponent from '../Connection/ConnectionListComponent.vue';
 
 export default {
   name: 'PagePage',
   components: {
-    PageListComponent
+    PageListComponent,
+    ConnectionListComponent
   },
   data () {
     return {
       book: this.$store.state.currentBook,
-      currentPage: null
+      currentPage: this.$store.state.currentPage
     }
   },
   mounted() {
@@ -26,6 +35,24 @@ export default {
   },
   methods: {
     pageChange () {
+
+    },
+    async newPage(){
+      console.log("got to newpage function");
+      console.log(this.book._id);
+      const response = await fetch(`/api/page/${this.book._id}`);
+
+      console.log(response);
+
+      if (!response.ok) {
+                console.log("okay");
+                const res = await response.json();
+                console.log(res);
+                throw new Error(res.error);
+      }
+
+      const page = await response.text();
+      this.currentPage =JSON.parse(page);
 
     }
   }

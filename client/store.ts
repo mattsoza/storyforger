@@ -8,7 +8,8 @@ const store = new Vuex.Store({
   state: {
     username: null,
     books: [], // Initalized on sign-in
-    currentBook: null
+    currentBook: null,
+    currentPage: null
   },
   mutations: {
     setUsername(state, username) {
