@@ -1,6 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
+import ConnectionCollection from '../connection/collection';
 import PageCollection from '../page/collection';
-import PageModel from '../page/model';
 import type {Book} from './model';
 import BookModel from './model';
 
@@ -20,10 +20,14 @@ class BookCollection {
    * @param {string} password - The password of the book
    * @return {Promise<HydratedDocument<Book>>} - The newly created book
    */
-  static async addOne(title: string, summary: string, author: Types.ObjectId|string): Promise<HydratedDocument<Book>> {
-    const dateCreated = new Date(); //TODO: delete if we don't add date aspect
-    const book = new BookModel({title, summary, author, public: false});
-    await book.save(); // Saves book to MongoDB
+  static async addOne(title: string, summary: string, authorId: Types.ObjectId|string): Promise<HydratedDocument<Book>> {
+    const bookModel = new BookModel({title, summary, author: authorId, public: false});
+    var book = await bookModel.save(); // Saves book to MongoDB
+    console.log("making page");
+    const firstPage = await PageCollection.addOne(book._id, authorId);
+    console.log("page made, linking");
+    bookModel.firstPage = firstPage._id;
+    book = await bookModel.save();
     return book;
   }
 
@@ -86,6 +90,8 @@ class BookCollection {
    */
   static async deleteOne(bookId: Types.ObjectId | string): Promise<boolean> {
     const book = await BookModel.deleteOne({_id: bookId});
+    await PageCollection.deleteAllByBookId(bookId);
+    await ConnectionCollection.deleteAllByBook(bookId);
     return book !== null;
   }
 
@@ -97,6 +103,8 @@ class BookCollection {
    */
   static async deleteAllByAuthor(authorId: Types.ObjectId | string): Promise<boolean> {
     const book = await BookModel.deleteMany({authorId});
+    await PageCollection.deleteAllByAuthorId(authorId);
+    await ConnectionCollection.deleteAllByAuthor(authorId);
     return book !== null;
   }
 }

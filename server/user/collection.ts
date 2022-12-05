@@ -1,4 +1,5 @@
 import type {HydratedDocument, Types} from 'mongoose';
+import BookCollection from 'server/book/collection';
 import type {User} from './model';
 import UserModel from './model';
 
@@ -89,6 +90,7 @@ class UserCollection {
    */
   static async deleteOne(userId: Types.ObjectId | string): Promise<boolean> {
     const user = await UserModel.deleteOne({_id: userId});
+    await BookCollection.deleteAllByAuthor(userId);
     return user !== null;
   }
 }

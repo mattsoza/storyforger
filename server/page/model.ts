@@ -15,6 +15,7 @@ export type Page = {
   bookId: Types.ObjectId;
   text: string;
   imageUrl: string;
+  authorId: Types.ObjectId;
 };
 
 // export type PopulatedPage = {
@@ -38,11 +39,15 @@ const PageSchema = new Schema({
   },
   text: {
     type: String,
-    required: true
+    required: false
   },
   imageUrl: {
     type: String,
     required: false
+  },
+  authorId: {
+    type: Schema.Types.ObjectId,
+    required: true
   }
 });
 

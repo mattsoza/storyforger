@@ -23,7 +23,7 @@ router.post(
   '/:bookId',
   [],
   async (req: Request, res: Response) => {
-    const page = await PageCollection.addOne(req.params.bookId);
+    const page = await PageCollection.addOne(req.params.bookId, req.session.userId);
     res.status(200).json({
       message: 'Page created.',
       page: page

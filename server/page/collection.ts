@@ -19,13 +19,16 @@ class PageCollection {
    * @param {Types.ObjectId} bookId - The id of the book to add the page to
    * @return {Promise<HydratedDocument<Page>>} - The newly created page
    */
-  static async addOne(bookId: Types.ObjectId | String): Promise<HydratedDocument<Page>> {
+  static async addOne(bookId: Types.ObjectId | String, authorId: Types.ObjectId | String): Promise<HydratedDocument<Page>> {
+    console.log("making model");
     const page = new PageModel({
       title: 'New Page',
       bookId: bookId,
-      text: '',
-      imageUrl: null
+      text: "",
+      imageUrl: null,
+      authorId: authorId
     });
+    console.log("saving");
     await page.save(); // Saves page to MongoDB
     return page;
   }
@@ -94,14 +97,25 @@ class PageCollection {
   }
 
   /**
-   * Deletes all pages from author
+   * Deletes all pages in book
    * 
    * @param {string} bookId - The bookId of pages to delete
    * @return {Promise<number>} - The number of pages deleted
    */
   static async deleteAllByBookId(bookId: Types.ObjectId | string): Promise<number> {
-    const page = await PageModel.deleteMany({bookId: bookId});
-    return page.deletedCount;
+    const result = await PageModel.deleteMany({bookId: bookId});
+    return result.deletedCount;
+  }
+
+  /**
+   * Deletes all pages from author
+   * 
+   * @param {string} authorId - The authorId of pages to delete
+   * @return {Promise<number>} - The number of pages deleted
+   */
+  static async deleteAllByAuthorId(authorId: Types.ObjectId | string): Promise<number> {
+    const result = await PageModel.deleteMany({authorId: authorId});
+    return result.deletedCount;
   }
 }
 
