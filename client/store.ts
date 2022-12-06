@@ -37,13 +37,21 @@ const store = new Vuex.Store({
       /**
        * Updates a page in our current book
        */
-      let pages = state.currentBook.pages
+      let pages = [].concat(state.currentBook.pages) // Creates deep copy of array
       let id = page._id
-      let newPages = pages.filter((element) => {
-        return !(String(element._id) === String(id))
-      })
-      newPages.push(page)
-      state.currentBook.pages = newPages
+
+      const idx = pages.findIndex((p) => p._id === id)
+
+      pages[idx] = page
+      console.log(pages)
+      state.currentBook.pages = pages
+
+      // let newPages = pages.filter((element) => {
+      //   return !(String(element._id) === String(id))
+      // })
+      // newPages.push(page)
+      // state.currentBook.pages = newPages
+
       state.currentPage = page
     }
   }

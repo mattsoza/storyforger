@@ -10,7 +10,7 @@
       @click="pageClicked(page)"
       >{{ page.title }}</li>
     </ul>
-    <PageView v-if="$store.state.currentPage" :page="$store.state.currentPage"  :pages="pages"/>
+    <PageView v-if="$store.state.currentPage" :page="$store.state.currentPage"  :pages="$store.state.currentBook.pages"/>
   </div>
 </template>
 
