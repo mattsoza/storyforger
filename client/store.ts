@@ -46,13 +46,21 @@ const store = new Vuex.Store({
       console.log(pages)
       state.currentBook.pages = pages
 
-      // let newPages = pages.filter((element) => {
-      //   return !(String(element._id) === String(id))
-      // })
-      // newPages.push(page)
-      // state.currentBook.pages = newPages
-
       state.currentPage = page
+    },
+    deletePage (state, page) {
+      /**
+       * Deletes a page from our currentBook
+       */
+        let pages = [].concat(state.currentBook.pages) // Creates deep copy of array
+        let id = page._id
+  
+        const idx = pages.findIndex((p) => p._id === id)
+
+        pages.splice(idx, 1)
+        state.currentBook.pages = pages
+
+        state.currentPage = null
     }
   }
 })

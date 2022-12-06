@@ -8,8 +8,12 @@
     :src="page.imageUrl" height="300">
   <p>{{ page.text }}</p>
   <button @click="openEdit">Edit Page</button>
+  <button @click="openDelete">Delete Page</button>
   <v-easy-dialog v-model="visible">
     <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
+  </v-easy-dialog>
+  <v-easy-dialog v-model="deleteDialog">
+    <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
   </v-easy-dialog>
   <!-- <router-link class="routerlink" to="/story">Edit Book</router-link> -->
 
@@ -21,6 +25,7 @@
 <script>
 import VEasyDialog from 'v-easy-dialog'
 import PageEditor from '@/components/Page/PageEditor.vue'
+import PageDelete from '@/components/Page/PageDelete.vue'
 import ConnectionListComponent from '../Connection/ConnectionListComponent.vue'
 
 export default {
@@ -28,6 +33,7 @@ export default {
   components: {
     VEasyDialog,
     PageEditor,
+    PageDelete,
     ConnectionListComponent
   },
   props: {
@@ -42,15 +48,22 @@ export default {
   },
   data () {
     return {
-      visible: false
+      visible: false,
+      deleteDialog: false
     }
   },
   methods: {
-    openEdit() {
-      this.visible = true;
+    openEdit () {
+      this.visible = true
     },
-    closeEdit() {
-      this.visible = false;
+    closeEdit () {
+      this.visible = false
+    },
+    openDelete () {
+      this.deleteDialog = true
+    },
+    closeDelete () {
+      this.deleteDialog = false
     }
   }
 }
