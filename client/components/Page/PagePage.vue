@@ -26,35 +26,32 @@ export default {
   },
   data () {
     return {
-      book: this.$store.state.currentBook,
+      book: this.$store.state.currentBook
       // currentPage: this.$store.state.currentPage
     }
   },
   mounted() {
-    this.book = this.$store.state.currentBook;
-    console.log(this.$store.state.currentBook);
+    this.book = this.$store.state.currentBook
+    console.log(this.$store.state.currentBook)
   },
   methods: {
     pageChange () {
 
     },
-    async newPage(){
-      const fields = {bookId: this.book._id};
-      const response = await fetch(`/api/page/${this.book._id}`, {method: 'POST', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}});
+    async newPage () {
+      const fields = { bookId: this.book._id }
+      const response = await fetch(`/api/page/${this.book._id}`, { method: 'POST', body: JSON.stringify(fields), headers: { 'Content-Type': 'application/json' } })
 
       if (!response.ok) {
-                console.log("okay");
-                const res = await response.json();
-                console.log(res);
-                throw new Error(res.error);
+        console.log('okay')
+        const res = await response.json()
+        console.log(res)
+        throw new Error(res.error)
       }
 
-      const page = (await response.json()).page;
-      this.book.pages.push(page);
-
-    },
-
-    
+      const page = (await response.json()).page
+      this.book.pages.push(page)
+    }
   }
 }
 </script>
