@@ -30,7 +30,7 @@ export default {
       // currentPage: this.$store.state.currentPage
     }
   },
-  mounted() {
+  mounted () {
     this.book = this.$store.state.currentBook
     console.log(this.$store.state.currentBook)
   },

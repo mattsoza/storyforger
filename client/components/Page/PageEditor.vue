@@ -24,8 +24,10 @@ export default {
         { id: 'image', label: 'Upload Image', value: this.page.image }
       ],
       title: 'Save',
-      callback: () => {
+      callback: (res) => {
         this.$emit('updateSuccess')
+        console.log(res)
+        this.$store.commit('updatePage', res.page)
       }
     }
   }

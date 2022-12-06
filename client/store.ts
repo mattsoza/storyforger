@@ -26,6 +26,18 @@ const store = new Vuex.Store({
     },
     setCurrentBook(state, book) {
       state.currentBook = book;
+    },
+    updatePage(state, page) {
+      /**
+       * Updates a page in our current book
+       */
+      let pages = state.currentBook.pages
+      let id = page._id
+      let newPages = pages.filter((element) => {
+        return !(String(element._id) === String(id))
+      })
+      newPages.push(page)
+      state.currentBook.pages = newPages
     }
   }
 })

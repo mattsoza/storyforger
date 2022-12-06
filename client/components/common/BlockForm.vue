@@ -115,12 +115,11 @@ export default {
       }
 
       try {
-        console.log(options.body)
-        const r = await fetch(this.url, options);
+        const r = await fetch(this.url, options)
         if (!r.ok) {
           // If response is not okay, we throw an error and enter the catch block
-          const res = await r.json();
-          throw new Error(res.error);
+          const res = await r.json()
+          throw new Error(res.error)
         }
 
         if (this.setUsername) {
@@ -130,7 +129,8 @@ export default {
         }
 
         if (this.callback) {
-          this.callback();
+          const res = await r.json()
+          this.callback(res)
         }
       } catch (e) {
         this.$set(this.alerts, e, 'error');
