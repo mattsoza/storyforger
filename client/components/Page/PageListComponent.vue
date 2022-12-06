@@ -7,10 +7,10 @@
       v-for="page in pages"
       :key="page._id"
       :page="page"
-      @click="(currentPage=page)"
+      @click="pageClicked(page)"
       >{{ page.title }}</li>
     </ul>
-    <PageView v-if="currentPage" :page="currentPage"  :pages="pages"/>
+    <PageView v-if="$store.state.currentPage" :page="$store.state.currentPage"  :pages="pages"/>
   </div>
 </template>
 
@@ -31,7 +31,12 @@ export default {
   },
   data () {
     return {
-      currentPage: this.pages.filter(page => page._id == this.$store.state.currentBook.firstPage)[0]
+      currentPage: this.pages.filter(page => page._id === this.$store.state.currentBook.firstPage)[0]
+    }
+  },
+  methods: {
+    pageClicked (page) {
+      this.$store.commit('updateCurrentPage', page)
     }
   }
 }

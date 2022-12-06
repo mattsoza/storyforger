@@ -24,8 +24,14 @@ const store = new Vuex.Store({
       const res = await fetch(url).then(async r => r.json());
       state.books = res;
     },
+    // Sets the current book, and consequently the currentPage
     setCurrentBook(state, book) {
       state.currentBook = book;
+      const currentPageInit = book.pages.filter(page => page._id === book.firstPage)[0]
+      state.currentPage = currentPageInit
+    },
+    updateCurrentPage(state, page) {
+      state.currentPage = page;
     },
     updatePage(state, page) {
       /**
@@ -38,6 +44,7 @@ const store = new Vuex.Store({
       })
       newPages.push(page)
       state.currentBook.pages = newPages
+      state.currentPage = page
     }
   }
 })
