@@ -4,10 +4,9 @@
     <div>
       <ul>
         <!-- Our connections are: {{findPageConnections()}}  -->
-        {{connections}}.
+        <!-- {{connections}}. -->
         <button @click="findPageConnections">Click here to findPageConnections</button>
         <div v-if="(pages.length!==0 && pages.length!==1)">
-        Link {{page.title}} to new Page
 
         <li
         v-for="connection in connections"
@@ -18,6 +17,7 @@
         /></li>
       </div>
         <div>
+        Link {{page.title}} to new Page
         <NewConnectionForm
         :page="page" :pages="pages"/>
       </div>

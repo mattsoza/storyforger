@@ -1,10 +1,7 @@
 <template>
     <div>
-      connection! 
-      {{connection.text}}
-        <div>{{this.child}}</div>
+      <b>{{connection.text}}</b>: {{this.getPageName(this.child)}}
     </div>
-    
 </template>
   
   <script>
@@ -55,6 +52,13 @@
         fetch(`/api/connections/${this.connectionId}`, params)
           .then((res) => {})
 
+      },
+      getPageName(pageId) {
+        let pages = [].concat(this.$store.state.currentBook.pages); // Creates deep copy of array
+        const index = pages.findIndex((p) => pageId === p._id);
+        const page = pages[index];
+        console.log(page);
+        return page.title;
       }
     }
   }
