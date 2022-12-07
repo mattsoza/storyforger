@@ -6,7 +6,11 @@
 export default {
     name: 'HomePage',
     mounted() {
-      this.$router.push({ name: 'My Stories' });
+      if (this.$store.state.username) {
+        this.$router.push({ name: 'My Stories' });
+      } else {
+        this.$router.push({ name: 'Login'});
+      }
     }
 }
 </script>

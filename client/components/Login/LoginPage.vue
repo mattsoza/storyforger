@@ -50,6 +50,11 @@ export default {
     openSignup() {
       this.currentAction = 'signup';
     }
+  },
+  mounted() {
+    if (this.$store.state.username) {
+      this.$router.push({ name: 'My Stories' });
+    }
   }
 };
 </script>
@@ -59,6 +64,7 @@ export default {
   h1 {
     font-size: 4em;
     margin-bottom: 0rem;
+    text-align: center;
   }
 
   a {

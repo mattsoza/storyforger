@@ -33,6 +33,11 @@ export default {
     ChangePasswordForm,
     DeleteAccountForm,
     LogoutForm
+  },
+  mounted() {
+    if (!this.$store.state.username) {
+      this.$router.push({ name: 'Login'});
+    }
   }
 }
 </script>

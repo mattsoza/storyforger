@@ -27,6 +27,9 @@ export default {
     }
   },
   async mounted() {
+    if (!this.$store.state.username) {
+      this.$router.push({ name: 'Login'});
+    }
     this.$store.commit('getBooks');
   }
 }

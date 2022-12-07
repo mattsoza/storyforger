@@ -17,7 +17,6 @@ export default {
       ],
       title: 'New Book',
       callback: () => {
-        this.$router.push({ name: 'My Stories' });
         this.$store.commit('getBooks');
       }
     }
