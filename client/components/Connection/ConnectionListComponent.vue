@@ -3,6 +3,8 @@
 <template>
     <div>
       <ul>
+        Our connections are: {{connections}}.
+
         <div v-if="(pages.length!==0 && pages.length!==1)">
         Link {{page.title}} to new Page
 
@@ -45,21 +47,19 @@ import NewConnectionForm from './NewConnectionForm.vue';
     },
     data () {
       return {
-        currentPage: null,
         connections: [],
         book: this.$store.state.currentBook
       }
     },
     mounted(){
-      this.findConnections();
+      this.findPageConnections();
     },
     methods: {
-        async findConnections(){
-          // const book = this.$store.state.currentBook ?? '';
-          // console.log("our params", this.page._id, "two", this.child._id, "thiree", this.text, "done");
-          // const fields = {parent: this.page._id, child: this.child._id, text: this.text };
-          const bookId = this.book ?? ''
-          const response = await fetch(`/api/connection/?bookId=${bookId}`);
+        async findBookConnections(){
+          console.log("find book connections");
+          const bookId = this.book._id;
+          console.log(bookId);
+          const response = await fetch(`/api/connection/?pageId=${bookId}`);
           console.log(response);
 
           if (!response.ok) {
@@ -70,8 +70,30 @@ import NewConnectionForm from './NewConnectionForm.vue';
                 throw new Error(res.error);
       }
 
-          const r = await response.text();
-          const ldj =JSON.parse(r);
+          const r = await response.json();
+          console.log("our list of connections:", r)
+          this.connections = r;
+        },
+        async findPageConnections(){
+          console.log("find page connections")
+          const pageId = this.page._id;
+          console.log(pageId);
+          const response = await fetch(`/api/connection/?bookId=${pageId}`);
+          console.log(response);
+
+          if (!response.ok) {
+                console.log("okay, you have an error");
+                const res = await response.text();
+                console.log(res);
+                console.log("thing above this was your res");
+                throw new Error(res.error);
+      }
+
+          const r = await response.json();
+          console.log("our list of connections from this page:", r)
+          console.log(r._id, r.parent);
+          this.connections = r;
+
         },
 
     }
