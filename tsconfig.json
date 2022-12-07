@@ -15,7 +15,7 @@
     // "target": 2, // For Vue version <= 2.6.14
   },
   "files": [
-    "./App.vue"
+    "./client/App.vue"
   ],
   "include": [
     "./src/*.ts",
