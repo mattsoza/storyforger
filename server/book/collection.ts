@@ -102,7 +102,7 @@ class BookCollection {
    * @return {Promise<Boolean>}
    */
   static async deleteAllByAuthor(authorId: Types.ObjectId | string): Promise<boolean> {
-    const book = await BookModel.deleteMany({authorId});
+    const book = await BookModel.deleteMany({author: authorId});
     await PageCollection.deleteAllByAuthorId(authorId);
     await ConnectionCollection.deleteAllByAuthor(authorId);
     return book !== null;

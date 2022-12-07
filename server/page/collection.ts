@@ -20,7 +20,6 @@ class PageCollection {
    * @return {Promise<HydratedDocument<Page>>} - The newly created page
    */
   static async addOne(bookId: Types.ObjectId | String, authorId: Types.ObjectId | String): Promise<HydratedDocument<Page>> {
-    console.log("making model");
     const page = new PageModel({
       title: 'New Page',
       bookId: bookId,
@@ -28,7 +27,6 @@ class PageCollection {
       imageUrl: null,
       authorId: authorId
     });
-    console.log("saving");
     await page.save(); // Saves page to MongoDB
     return page;
   }

@@ -10,7 +10,6 @@ export default {
     return {
       url: '/api/book',
       method: 'POST',
-      setUsername: true,
       hasBody: true,
       fields: [
         { id: 'title', label: 'Title', value: '' },
@@ -18,7 +17,6 @@ export default {
       ],
       title: 'New Book',
       callback: () => {
-        this.$router.push({ name: 'My Stories' });
         this.$store.commit('getBooks');
       }
     }

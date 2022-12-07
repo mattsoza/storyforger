@@ -65,7 +65,10 @@ export default {
 
 .newBookButton {
   font-size: 1.4em;
-  min-width: 20vw;
-  padding: .4em;
+  margin: auto;
+  width: 80%;
+  text-align: center;
+  padding: .4em 0 .4em 0;
+  display: block;
 }
 </style>

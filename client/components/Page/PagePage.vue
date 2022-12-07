@@ -31,8 +31,7 @@ export default {
     }
   },
   mounted () {
-    this.book = this.$store.state.currentBook
-    console.log(this.$store.state.currentBook)
+    this.book = this.$store.state.currentBook;
   },
   methods: {
     pageChange () {

@@ -122,15 +122,16 @@ export default {
           throw new Error(res.error)
         }
 
+        var res;
         if (this.setUsername) {
           const text = await r.text();
-          const res = text ? JSON.parse(text) : {user: null};
+          res = text ? JSON.parse(text) : {user: null};
           this.$store.commit('setUsername', res.user ? res.user.username : null);
+        } else {
+          res = await r.json();
         }
-
         if (this.callback) {
-          const res = await r.json()
-          this.callback(res)
+          this.callback(res);
         }
       } catch (e) {
         this.$set(this.alerts, e, 'error');
