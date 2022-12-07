@@ -55,7 +55,8 @@ const isValidConnectionModifier = async (req: Request, res: Response, next: Next
   const userId = req.session.userId;
   const connection = ConnectionCollection.findOneByConnectionId(connectionId);
   const connectionAuthor = (await connection).author as unknown as string;
-  if (connectionAuthor!==userId){
+  if (connectionAuthor!=userId.toString()){
+    console.log("no");
     res.status(401).json({
       error: `Signed in User cannot modify connections for this book`
     });

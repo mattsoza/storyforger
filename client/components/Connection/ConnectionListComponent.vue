@@ -9,7 +9,7 @@
         <div v-if="(pages.length!==0 && pages.length!==1)">
 
         <li
-        v-for="connection in connections"
+        v-for="connection in page.connections"
         :key="connection._id"
         :connection="connection"
         > <ConnectionComponent 
