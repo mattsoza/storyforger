@@ -76,24 +76,14 @@ import NewConnectionForm from './NewConnectionForm.vue';
           this.connections = r;
         },
         async findPageConnections(){
-          console.log("find page connections")
           const pageId = this.page._id;
-          console.log(pageId);
           const response = await fetch(`/api/connection/?pageId=${pageId}`);
-          console.log(response);
-
           if (!response.ok) {
-                console.log("okay, you have an error");
                 const res = await response.text();
-                console.log(res);
-                console.log("thing above this was your res");
                 throw new Error(res.error);
-              }
-
+          }
           const r = await response.json();
           this.connections = r;
-          
-
         },
 
     }

@@ -9,6 +9,20 @@
   <p>{{ page.text }}</p>
   <button @click="openEdit">Edit Page</button>
   <button @click="openDelete">Delete Page</button>
+  <div v-if="(page.connections.length!==0)">
+    This Page's Connections:
+    <li
+        v-for="connection in page.connections"
+        :key="connection._id"
+        :connection="connection"
+        >  
+        <!-- <ConnectionComponent 
+            :connection="connection"
+        /> -->
+        {{connection.text}}
+      </li>
+      </div>
+
   <v-easy-dialog v-model="visible">
     <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
   </v-easy-dialog>
@@ -27,6 +41,7 @@ import VEasyDialog from 'v-easy-dialog'
 import PageEditor from '@/components/Page/PageEditor.vue'
 import PageDelete from '@/components/Page/PageDelete.vue'
 import ConnectionListComponent from '../Connection/ConnectionListComponent.vue'
+import ConnectionComponent from '../Connection/ConnectionComponent.vue'
 
 export default {
   name: 'PageView',
@@ -34,7 +49,8 @@ export default {
     VEasyDialog,
     PageEditor,
     PageDelete,
-    ConnectionListComponent
+    ConnectionListComponent,
+    ConnectionComponent
   },
   props: {
     page: {

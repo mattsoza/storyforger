@@ -4,6 +4,7 @@ import Aws from 'aws-sdk';
 import type {Page} from './model';
 import type {HydratedDocument} from 'mongoose';
 import BookCollection from '../book/collection'; 
+import ConnectionCollection from '../connection/collection';
 
 require("dotenv/config")
 
@@ -13,6 +14,7 @@ type PageResponse = {
     bookId: string;
     text: string;
     image: string | Object | undefined | null;
+    connections: Object[];
   };
 
 const constructPageResponse = async (page: HydratedDocument<Page>): Promise<PageResponse> => {
@@ -23,6 +25,8 @@ const constructPageResponse = async (page: HydratedDocument<Page>): Promise<Page
     };
 
     const bookItem = await BookCollection.findOneByBookId(pageCopy.bookId);
+    const connections = await ConnectionCollection.findAllByParent(pageCopy._id);
+
     const book = bookItem._id as unknown as string;
     delete pageCopy.bookId;
 
@@ -47,7 +51,8 @@ const constructPageResponse = async (page: HydratedDocument<Page>): Promise<Page
         ...pageCopy,
         _id: pageCopy._id.toString(),
         bookId: book,
-        image: image
+        image: image,
+        connections
       };
 }
 
