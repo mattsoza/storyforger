@@ -53,6 +53,7 @@ router.patch(
   async (req: Request, res: Response) => {
     let imageUrl: string = null;
     if (req.body.image) {
+      console.log((req.body.image as string).slice(0,1000));
       const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: req.params.pageId,
@@ -60,15 +61,15 @@ router.patch(
         ACL: "public-read-write", // permissions to get the public link
         ContentType: "image/jpeg" // define the image content-type to view the photo in the browser with the link
       };
-      util.s3.upload(params, (error: any, data: { Location: any; }) => {
-        if (error) {
-          console.log(error);
-          res.status(500).json({
-            error: error
-          });
-        }
-        imageUrl = data.Location;
-      });
+      try {
+        const response = await util.s3.upload(params).promise();
+        imageUrl = response.Location;
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({
+          error: error
+        });
+      }
     }
     const pageDetails = {
       title: req.body.title,

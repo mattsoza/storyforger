@@ -4,8 +4,8 @@
 <div>
   <h2>{{ page.title }}</h2>
   <img
-    v-if="page.imageUrl"
-    :src="page.imageUrl" height="300">
+    v-if="page.image"
+    v-bind:src="page.image" height="300">
   <p>{{ page.text }}</p>
   <button @click="openEdit">Edit Page</button>
   <button @click="openDelete">Delete Page</button>

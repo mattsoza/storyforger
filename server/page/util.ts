@@ -12,7 +12,7 @@ type PageResponse = {
     title: string;
     bookId: string;
     text: string;
-    imageUrl: string;
+    image: string | Object | undefined | null;
   };
 
 const constructPageResponse = async (page: HydratedDocument<Page>): Promise<PageResponse> => {
@@ -26,10 +26,28 @@ const constructPageResponse = async (page: HydratedDocument<Page>): Promise<Page
     const book = bookItem._id as unknown as string;
     delete pageCopy.bookId;
 
+    var image: string | Object | undefined | null = null;
+    if (page.imageUrl != null) {
+        const params = {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: page._id.toString()
+        };
+        try {
+            const response = await s3.getObject(params).promise();
+            image = response.Body?.toString();
+        } catch (error) {
+            console.log(error);
+            // res.status(500).json({
+            //     error: error
+            // });
+        }
+    }
+
     return {
         ...pageCopy,
         _id: pageCopy._id.toString(),
-        bookId: book
+        bookId: book,
+        image: image
       };
 }
 

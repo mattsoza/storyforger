@@ -21,7 +21,7 @@ export default {
       fields: [
         { id: 'title', label: 'Title', value: this.page.title },
         { id: 'text', label: 'Text', value: this.page.text },
-        { id: 'image', label: 'Upload Image', value: this.page.image }
+        { id: 'image', label: 'Upload Image' }
       ],
       title: 'Save',
       callback: (res) => {
