@@ -23,9 +23,7 @@ router.post(
   '/:bookId',
   [],
   async (req: Request, res: Response) => {
-    console.log("creating new page");
     const page = await PageCollection.addOne(req.params.bookId, req.session.userId);
-    console.log("our new page!", page);
 
     res.status(200).json({
       message: 'Page created.',
@@ -53,7 +51,6 @@ router.patch(
   async (req: Request, res: Response) => {
     let imageUrl: string = null;
     if (req.body.image) {
-      console.log((req.body.image as string).slice(0,1000));
       const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: req.params.pageId,

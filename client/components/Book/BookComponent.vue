@@ -2,8 +2,8 @@
 
 <template>
   <div class="bookCard" @click="storeBook">
-    <h1>{{ title }}</h1>
-    <h2>{{ description }}</h2>
+    <h2>{{ title }}</h2>
+    <h3>{{ description }}</h3>
     <button @click="editBook">Edit Book</button>
     <button @click="deleteBook">Delete</button>
   </div>
@@ -74,16 +74,16 @@ div.bookCard {
   border: 1px solid black;
   border-radius: 8px;
   padding: 1em 1em;
-  margin: 2em;
-  max-width: 20vw;
+  margin: 2em 10% 2em 10%;
+  word-break: break-word;
 }
 
-div.bookCard>h1 {
+div.bookCard>h2 {
   font-size: 2rem;
   margin: 0;
 }
 
-div.bookCard>h2 {
+div.bookCard>h3 {
   font-size: 1.2rem;
   font-weight: normal;
 }
