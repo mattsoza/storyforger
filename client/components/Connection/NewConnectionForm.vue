@@ -9,7 +9,6 @@
   <button @click="createConnection">Create Connection</button>
 </div>
 
-{{child}}
 </div>
 
 

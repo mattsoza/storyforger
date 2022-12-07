@@ -3,10 +3,9 @@
 <template>
     <div>
       <ul>
-        You're in the Connection List Component
-        <div>
-        Here's the list:
-        
+        <div v-if="(pages.length!==0 && pages.length!==1)">
+        Link {{page.title}} to new Page
+
         <li
         v-for="connection in connections"
         :key="connection._id"
@@ -16,18 +15,10 @@
         /></li>
       </div>
         <div>
-        Here's where to add a new Connection:
-
-
         <NewConnectionForm
         :page="page" :pages="pages"/>
       </div>
 
-      <div>
-
-        wour pages: {{pages}}
-
-      </div>
       </ul>
     </div>
   </template>
@@ -54,8 +45,35 @@ import NewConnectionForm from './NewConnectionForm.vue';
     },
     data () {
       return {
-        currentPage: null
+        currentPage: null,
+        connections: [],
+        book: this.$store.state.currentBook
       }
+    },
+    mounted(){
+      this.findConnections();
+    },
+    methods: {
+        async findConnections(){
+          // const book = this.$store.state.currentBook ?? '';
+          // console.log("our params", this.page._id, "two", this.child._id, "thiree", this.text, "done");
+          // const fields = {parent: this.page._id, child: this.child._id, text: this.text };
+          const bookId = this.book ?? ''
+          const response = await fetch(`/api/connection/?bookId=${bookId}`);
+          console.log(response);
+
+          if (!response.ok) {
+                console.log("okay, you have an error");
+                const res = await response.text();
+                console.log(res);
+                console.log("thing above this was your res");
+                throw new Error(res.error);
+      }
+
+          const r = await response.text();
+          const ldj =JSON.parse(r);
+        },
+
     }
   }
   
