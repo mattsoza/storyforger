@@ -17,7 +17,8 @@ export default {
       ],
       title: 'New Book',
       callback: () => {
-        this.$store.commit('getBooks');
+        this.$store.commit('getBooks')
+        this.$emit('newBookCreated')
       }
     }
   }

@@ -4,7 +4,7 @@
   <div>
     <button class="newBookButton" @click="(newBookDialog=true)">New book</button>
     <v-easy-dialog v-model="newBookDialog">
-      <NewBookForm />
+      <NewBookForm @newBookCreated="(newBookDialog=false)"/>
     </v-easy-dialog>
   </div>
 </template>
@@ -29,24 +29,7 @@ export default {
       /**
        * Creates a new book for this user
        */
-      evt.preventDefault()
-
-      const params = {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: {
-          title: 'evt.body',
-          description: 'evt.target.description'
-        }
-      }
-
-      console.log(evt)
-
-      // fetch('/api/book', params)
-      //   .then((res) => { res.json() })
-      //   .then((data) => { console.log(data) })
-
-      // this.newBookDialog = false
+      
     }
   }
 }
