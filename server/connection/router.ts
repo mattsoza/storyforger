@@ -54,8 +54,10 @@ router.get(
     //TODO: check that book is valid ig
     //bookId
     const allConnections = await ConnectionCollection.findAllByBook(bookId as string);
-    const response = allConnections.map(util.constructConnectionResponse);
-    res.status(200).json(response)
+    let response = [];
+    for (const connection of allConnections) {
+      response.push(await util.constructConnectionResponse(connection));
+    }    res.status(200).json(response)
   },
   [
     connectionValidator.isValidPage
@@ -63,7 +65,12 @@ router.get(
   async (req: Request, res: Response) => {
     const pageId = req.query.pageId;
     const authorConnections = await ConnectionCollection.findAllByParent(pageId as string);
-    const response = authorConnections.map(util.constructConnectionResponse);
+    let response = [];
+    for (const connection of authorConnections) {
+      response.push(await util.constructConnectionResponse(connection));
+    }
+    console.log("response (router)", response);
+
     res.status(200).json(response);
   }
 );
@@ -95,7 +102,6 @@ router.post(
     const author = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const parent = await PageCollection.findOneByPageId(parentId);
     const bookId = parent.bookId;
-    console.log(" the four things youre adding with", parentId, childId, text, author, bookId, "done");
     const connection = await ConnectionCollection.addOne(parentId, childId, text, author, bookId);
 
     res.status(201).json({

@@ -40,8 +40,8 @@ class ConnectionCollection {
    * @param {string} parent - the starting point of the connections we are fetching
    * @return {Promise<HydratedDocument<Connection>[]> | Promise<[]>} - A list of connections from parent page to another page
    */
-  static async findAllByParent(parent: Types.ObjectId | string): Promise<Array<HydratedDocument<Connection>>> {
-    return ConnectionModel.find({parent});
+  static async findAllByParent(parentId: Types.ObjectId | string): Promise<Array<HydratedDocument<Connection>>> {
+    return ConnectionModel.find({parent:parentId});
   }
 
   /**

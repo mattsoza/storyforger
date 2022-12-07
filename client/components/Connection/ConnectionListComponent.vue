@@ -3,8 +3,9 @@
 <template>
     <div>
       <ul>
-        Our connections are: {{connections}}.
-
+        <!-- Our connections are: {{findPageConnections()}}  -->
+        {{connections}}.
+        <button @click="findPageConnections">Click here to findPageConnections</button>
         <div v-if="(pages.length!==0 && pages.length!==1)">
         Link {{page.title}} to new Page
 
@@ -68,7 +69,7 @@ import NewConnectionForm from './NewConnectionForm.vue';
                 console.log(res);
                 console.log("thing above this was your res");
                 throw new Error(res.error);
-      }
+              }
 
           const r = await response.json();
           console.log("our list of connections:", r)
@@ -78,7 +79,7 @@ import NewConnectionForm from './NewConnectionForm.vue';
           console.log("find page connections")
           const pageId = this.page._id;
           console.log(pageId);
-          const response = await fetch(`/api/connection/?bookId=${pageId}`);
+          const response = await fetch(`/api/connection/?pageId=${pageId}`);
           console.log(response);
 
           if (!response.ok) {
@@ -87,12 +88,11 @@ import NewConnectionForm from './NewConnectionForm.vue';
                 console.log(res);
                 console.log("thing above this was your res");
                 throw new Error(res.error);
-      }
+              }
 
           const r = await response.json();
-          console.log("our list of connections from this page:", r)
-          console.log(r._id, r.parent);
           this.connections = r;
+          
 
         },
 

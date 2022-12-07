@@ -32,26 +32,25 @@ const constructConnectionResponse = async (connection: HydratedDocument<Connecti
   };
 
   //TODO
-  const author = await UserCollection.findOneByUserId(connectionCopy.author);
-  const parentPage = await PageCollection.findOneByPageId(connectionCopy.parent);
-  const childPage = await PageCollection.findOneByPageId(connectionCopy.child);
-  const bookItem = await BookCollection.findOneByBookId(connectionCopy.book);
-  const username = author.username;
-  const parent = parentPage._id as unknown as string;
-  const child = childPage._id as unknown as string;
-  const book = bookItem._id as unknown as string;
-  delete connectionCopy.author;
-  delete connectionCopy.parent;
-  delete connectionCopy.child;
-  delete connectionCopy.book;
+  // const author = connectionCopy.author._id
+  // const parentPage = connectionCopy.parent._id;
+  // const childPage = connectionCopy.child;
+  // const bookItem = connectionCopy.book;
+  // const parent = parentPage._id as unknown as string;
+  // const child = childPage._id as unknown as string;
+  // const book = bookItem._id as unknown as string;
+  // delete connectionCopy.author;
+  // delete connectionCopy.parent;
+  // delete connectionCopy.child;
+  // delete connectionCopy.book;
 
   return {
     ...connectionCopy,
     _id: connectionCopy._id.toString(),
-    author: username,
-    parent,
-    child,
-    book
+    author: connectionCopy.author.toString(),
+    parent: connectionCopy.parent.toString(),
+    child: connectionCopy.child.toString(),
+    book: connectionCopy.book.toString()
   };
 };
 

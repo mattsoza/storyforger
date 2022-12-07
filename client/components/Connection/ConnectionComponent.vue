@@ -1,5 +1,7 @@
 <template>
-    <div>{{connection.text}}
+    <div>
+      connection! 
+      {{connection.text}}
         <div>{{this.child}}</div>
     </div>
     
