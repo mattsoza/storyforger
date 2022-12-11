@@ -53,7 +53,7 @@ export default {
     },
     viewBook () {
       this.$store.commit('setCurrentBook', this.book)
-      this.$router.push({ name: 'book' })
+      this.$router.push({ name: 'Book' })
     },
     async deleteBook (evt) {
       /**

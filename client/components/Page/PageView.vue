@@ -9,7 +9,6 @@
   <p>{{ page.text }}</p>
   <button @click="openEdit">Edit Page</button>
   <button @click="openDelete">Delete Page</button>
-  
 
   <v-easy-dialog v-model="visible">
     <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
