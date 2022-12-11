@@ -4,6 +4,7 @@
   <div class="bookCard" @click="storeBook">
     <h2>{{ title }}</h2>
     <h3>{{ description }}</h3>
+    <button @click="viewBook">View Book</button>
     <button @click="editBook">Edit Book</button>
     <button @click="deleteBook">Delete</button>
   </div>
@@ -47,8 +48,12 @@ export default {
         .then((res) => {})
     },
     editBook () {
-      this.$store.commit('setCurrentBook', this.book);
-      this.$router.push({ name: 'Story' });
+      this.$store.commit('setCurrentBook', this.book)
+      this.$router.push({ name: 'Story' })
+    },
+    viewBook () {
+      this.$store.commit('setCurrentBook', this.book)
+      this.$router.push({ name: 'book' })
     },
     async deleteBook (evt) {
       /**

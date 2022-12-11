@@ -18,7 +18,8 @@ const routes = [
     {path: '/my-stories', name: 'My Stories', component: BookPage},
     {path: '/account', name: 'Account', component: AccountPage},
     {path: '/image', name: "Image Upload", component: ImageUploadComponent},
-    {path: '/story', name: 'Story', component: PagePage}
+    {path: '/story', name: 'Story', component: PagePage},
+    {path: '/book', name: 'Book', component: BookPage}
 ]
 
 const router = new VueRouter({routes});
@@ -32,7 +33,8 @@ router.beforeEach((to, from, next) => {
       next({name: 'My Stories'}); // Go to Account page if user navigates to Login and are signed in
       return;
     }
-    if ((to.name === 'Home' || to.name === 'Account' || to.name === 'My Stories') && !router.app.$store.state.username) {
+    const loginPages = ['Home', 'Account', 'My Stories', 'Book']
+    if (loginPages.includes(to.name) && !router.app.$store.state.username) {
       next({name: 'Login'}); // Go to Login page if user navigates to Account and are not signed in
       return;
     }
