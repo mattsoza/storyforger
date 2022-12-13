@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <button class="newBookButton" @click="(newBookDialog=true)">New book</button>
+    <button class="newBookButton" @click="(newBookDialog=true)">➕ Create new book</button>
     <v-easy-dialog v-model="newBookDialog">
       <NewBookForm @newBookCreated="(newBookDialog=false)"/>
     </v-easy-dialog>
