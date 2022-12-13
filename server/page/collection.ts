@@ -20,8 +20,9 @@ class PageCollection {
    * @return {Promise<HydratedDocument<Page>>} - The newly created page
    */
   static async addOne(bookId: Types.ObjectId | String, authorId: Types.ObjectId | String): Promise<HydratedDocument<Page>> {
+    const numPages = await PageModel.count({bookId: bookId});
     const page = new PageModel({
-      title: 'New Page',
+      title: 'Page ' + (numPages+1),
       bookId: bookId,
       text: "",
       imageUrl: null,
