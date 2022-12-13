@@ -17,6 +17,7 @@
         :connection="connection"
         > <ConnectionComponent
             :connection="connection"
+            :page="page"
             @connectionsChanged="updateConnections"
         /></li>
       </div>
