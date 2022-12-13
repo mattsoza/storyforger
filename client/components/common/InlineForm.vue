@@ -38,10 +38,10 @@ export default {
       default: 'Submit'
     }
   },
-  data() {
-    return {value: '', alerts: {}};
+  data () {
+    return { value: '', alerts: {} }
   }
-};
+}
 </script>
 
 <style scoped>

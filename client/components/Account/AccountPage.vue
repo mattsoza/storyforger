@@ -34,9 +34,9 @@ export default {
     DeleteAccountForm,
     LogoutForm
   },
-  mounted() {
+  mounted () {
     if (!this.$store.state.username) {
-      this.$router.push({ name: 'Login'});
+      this.$router.push({ name: 'Login' })
     }
   }
 }

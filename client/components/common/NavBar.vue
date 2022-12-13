@@ -4,7 +4,7 @@
 
 <template>
   <nav>
-    
+
     <div class="right">
       <p v-if="$store.state.username"> {{$store.state.username}}</p>
       <router-link
@@ -91,6 +91,6 @@ a {
 
 .current{
   background-color: #48f;
-  
+
 }
 </style>

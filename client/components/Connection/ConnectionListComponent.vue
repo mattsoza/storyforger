@@ -12,7 +12,7 @@
         v-for="connection in page.connections"
         :key="connection._id"
         :connection="connection"
-        > <ConnectionComponent 
+        > <ConnectionComponent
             :connection="connection"
         /></li>
       </div>
@@ -28,7 +28,7 @@
 
 <script>
 import ConnectionComponent from './ConnectionComponent.vue'
-import NewConnectionForm from './NewConnectionForm.vue';
+import NewConnectionForm from './NewConnectionForm.vue'
 
 export default {
   name: 'ConnectionListComponent',

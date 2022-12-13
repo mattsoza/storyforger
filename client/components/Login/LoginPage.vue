@@ -8,7 +8,7 @@
     <h2>
       Make choose-your-own-adventure books with ease!
     </h2>
-    
+
     <div
     id="buttons"
     v-if="currentAction===null"
@@ -32,31 +32,31 @@
 </template>
 
 <script>
-import LoginForm from '@/components/Login/LoginForm.vue';
-import SignupForm from '@/components/Login/SignupForm.vue';
+import LoginForm from '@/components/Login/LoginForm.vue'
+import SignupForm from '@/components/Login/SignupForm.vue'
 
 export default {
   name: 'LoginPage',
-  data() {
+  data () {
     return {
-      currentAction: null,
+      currentAction: null
     }
   },
-  components: {LoginForm, SignupForm},
+  components: { LoginForm, SignupForm },
   methods: {
-    openLogin() {
-      this.currentAction = 'login';
+    openLogin () {
+      this.currentAction = 'login'
     },
-    openSignup() {
-      this.currentAction = 'signup';
+    openSignup () {
+      this.currentAction = 'signup'
     }
   },
-  mounted() {
+  mounted () {
     if (this.$store.state.username) {
-      this.$router.push({ name: 'My Stories' });
+      this.$router.push({ name: 'My Stories' })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -103,7 +103,7 @@ export default {
     }
 
     &.login {
-      
+
     }
   }
 </style>

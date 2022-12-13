@@ -67,7 +67,7 @@
 
 export default {
   name: 'BlockForm',
-  data() {
+  data () {
     /**
      * Options for submitting this form.
      */
@@ -79,7 +79,7 @@ export default {
       refreshFreets: false, // Whether or not stored freets should be updated after form submission
       alerts: {}, // Displays success/error messages encountered during form submission
       callback: null // Function to run after successful form submission
-    };
+    }
   },
   methods: {
     uploadImage (e) {
@@ -122,24 +122,24 @@ export default {
           throw new Error(res.error)
         }
 
-        var res;
+        let res
         if (this.setUsername) {
-          const text = await r.text();
-          res = text ? JSON.parse(text) : {user: null};
-          this.$store.commit('setUsername', res.user ? res.user.username : null);
+          const text = await r.text()
+          res = text ? JSON.parse(text) : { user: null }
+          this.$store.commit('setUsername', res.user ? res.user.username : null)
         } else {
-          res = await r.json();
+          res = await r.json()
         }
         if (this.callback) {
-          this.callback(res);
+          this.callback(res)
         }
       } catch (e) {
-        this.$set(this.alerts, e, 'error');
-        setTimeout(() => this.$delete(this.alerts, e), 3000);
+        this.$set(this.alerts, e, 'error')
+        setTimeout(() => this.$delete(this.alerts, e), 3000)
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

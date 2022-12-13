@@ -11,7 +11,10 @@
     "typeRoots": ["./node_modules/@types", "./src/types"],
   },
   "vueCompilerOptions": {
-    "target": 2.7
+    "target": 2.7,
+    "extensions": [
+      ".vue"
+    ]
     // "target": 2, // For Vue version <= 2.6.14
   },
   "files": [
@@ -20,6 +23,7 @@
   "include": [
     "./src/*.ts",
     "./src/*.vue",
-    "./src/*.ext"
+    "./src/*.ext",
+    "./client/componets/**/*.vue"
   ]
 }

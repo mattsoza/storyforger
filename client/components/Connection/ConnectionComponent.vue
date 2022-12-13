@@ -59,7 +59,7 @@ export default {
         .then((res) => {})
     },
     getPage (pageId) {
-      let pages = [].concat(this.$store.state.currentBook.pages) // Creates deep copy of array
+      const pages = [].concat(this.$store.state.currentBook.pages) // Creates deep copy of array
       const index = pages.findIndex((p) => pageId === p._id)
       const page = pages[index]
       console.log(page)

@@ -1,7 +1,6 @@
 <!-- Webpage containing all the page elements; the PagePage! :P -->
 <!-- Webpage containing all the page elements; the PagePage! :P -->
 
-
 <template>
 <div @pageChange="pageChange">
 
@@ -16,7 +15,7 @@
 
 <script>
 import PageListComponent from './PageListComponent.vue'
-import ConnectionListComponent from '../Connection/ConnectionListComponent.vue';
+import ConnectionListComponent from '../Connection/ConnectionListComponent.vue'
 
 export default {
   name: 'PagePage',
@@ -31,7 +30,7 @@ export default {
     }
   },
   mounted () {
-    this.book = this.$store.state.currentBook;
+    this.book = this.$store.state.currentBook
   },
   methods: {
     pageChange () {
