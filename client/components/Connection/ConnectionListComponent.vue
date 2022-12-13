@@ -5,7 +5,8 @@
       <ul>
         <!-- Our connections are: {{findPageConnections()}}  -->
         <!-- {{connections}}. -->
-        Travel from this Page to any other pages listed below!
+        <h2>Travel from this Page to any other pages listed below!</h2>
+        
 
         <!-- <button @click="findPageConnections">Click here to findPageConnections</button> -->
         <div v-if="(pages.length!==0 && pages.length!==1)">
