@@ -5,7 +5,7 @@
       <ul>
         <!-- Our connections are: {{findPageConnections()}}  -->
         <!-- {{connections}}. -->
-        <button @click="findPageConnections">Click here to findPageConnections</button>
+        <button @click="updateConnections">Click here to findPageConnections</button>
         <div v-if="(pages.length!==0 && pages.length!==1)">
 
         <li
@@ -14,12 +14,14 @@
         :connection="connection"
         > <ConnectionComponent 
             :connection="connection"
+            @connectionsChanged="updateConnections"
         /></li>
       </div>
         <div>
         Link {{page.title}} to new Page
         <NewConnectionForm
-        :page="page" :pages="pages"/>
+        :page="page" :pages="pages"
+        @connectionsChanged="updateConnections"/>
       </div>
 
       </ul>
@@ -53,37 +55,12 @@ export default {
     }
   },
   mounted () {
-    this.findPageConnections()
+    this.updateConnections()
   },
   methods: {
-    async findBookConnections () {
-      console.log('find book connections')
-      const bookId = this.book._id
-      console.log(bookId)
-      const response = await fetch(`/api/connection/?pageId=${bookId}`)
-      console.log(response)
-
-      if (!response.ok) {
-        console.log('okay, you have an error')
-        const res = await response.text()
-        console.log(res)
-        console.log('thing above this was your res')
-        throw new Error(res.error)
-      }
-
-      const r = await response.json()
-      console.log('our list of connections:', r)
-      this.connections = r
-    },
-    async findPageConnections () {
-      const pageId = this.page._id
-      const response = await fetch(`/api/connection/?pageId=${pageId}`)
-      if (!response.ok) {
-        const res = await response.text()
-        throw new Error(res.error)
-      }
-      const r = await response.json()
-      this.connections = r
+    async updateConnections() {
+      console.log("updating");
+      this.$store.commit('updateConnections', this.page._id)
     }
   }
 }

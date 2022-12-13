@@ -35,15 +35,15 @@ export default {
       fetch(`/api/connection/${this.connectionId}`, params)
         .then((res) => {})
     },
-    deleteConnection (evt) {
+    async deleteConnection (evt) {
       const params = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
-      }
-
-      fetch(`/api/connection/${this.connectionId}`, params)
-        .then((res) => { res.json() })
-        .then((data) => { console.log(data) })
+      };
+      console.log("deleting");
+      const response = await fetch(`/api/connection/${this.connectionId}`, params);
+      console.log("deleted");
+      this.$emit('connectionsChanged');
     },
     followConnection () {
       this.$store.commit('updateCurrentPage', this.getPage(this.child))
