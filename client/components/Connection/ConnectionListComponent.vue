@@ -17,10 +17,11 @@
         :connection="connection"
         > <ConnectionComponent 
             :connection="connection"
+            :page="page"
         /></li>
       </div>
         <div>
-        Link {{page.title}} to new Page
+        <h3> Create a new connection from <b>{{page.title}}</b> to another page </h3>
         <NewConnectionForm
         :page="page" :pages="pages"/>
       </div>

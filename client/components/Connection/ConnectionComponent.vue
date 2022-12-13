@@ -1,8 +1,9 @@
 <template>
     <div>
-      <b>{{connection.text}}</b>: {{this.getPage(this.child).title}}
+      <b>{{connection.text}}</b>: From <b>{{this.parent.title}}</b> to <b>{{this.child.title}}</b>
+      <!-- {{this.parent.title}} -> {{this.child.title}} -->
       <!-- <button>Edit Connection</button> -->
-      <button @click="deleteConnection">Delete Connection</button>
+      <button @click="deleteConnection"> 🗑️ Delete Connection</button>
       <button @click="followConnection">Follow Connection</button>
     </div>
 </template>
@@ -14,17 +15,28 @@ export default {
     connection: {
       type: Object,
       required: true
+    },
+    page: {
+      type: Object,
+      required: true
     }
   },
   data () {
     return {
       text: this.connection.text,
-      child: this.connection.child,
+      child: false,
+      parent: this.page,
       connectionId: this.connection._id,
       editing: false
     }
   },
+  mounted(){
+    this.getChild();
+  },
   methods: {
+    getChild(){
+      this.child = this.getPage(this.connection.child);
+    },
     editText (evt) {
       const params = {
         method: 'PATCH',
@@ -46,7 +58,7 @@ export default {
         .then((data) => { console.log(data) })
     },
     followConnection () {
-      this.$store.commit('updateCurrentPage', this.getPage(this.child))
+      this.$store.commit('updateCurrentPage', this.child)
     },
     editChild (evt) {
       const params = {

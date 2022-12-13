@@ -5,9 +5,7 @@
       <option v-for="childOption in pages" :value="childOption">{{childOption.title}}</option>
     </select>
 
-    <div v-if="child">
-      <button @click="createConnection">Create Connection</button>
-    </div>
+      <button v-if="child" @click="createConnection">Create Connection</button>
 
   </div>
 </template>
