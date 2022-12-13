@@ -31,7 +31,13 @@ const store = new Vuex.Store({
       state.currentPage = currentPageInit
     },
     updateCurrentPage(state, page) {
+      // Given a page object, updated the currentPage
       state.currentPage = page;
+    },
+    updateCurrentPageId(state, pageId) {
+      // Given a page ID, update the currentPage
+      const nextPage = state.currentBook.pages.filter(page => page._id === pageId)[0]
+      state.currentPage = nextPage
     },
     updatePage(state, page) {
       /**

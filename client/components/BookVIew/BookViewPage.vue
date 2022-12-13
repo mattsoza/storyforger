@@ -2,14 +2,19 @@
 
 <template>
   <div>
-    <h3>{{ page.title }}</h3>
+    <h3>{{ this.$store.state.currentPage.title }}</h3>
     <img
-    v-bind:src="page.image"
+    v-bind:src="this.$store.state.currentPage.image"
     class="pageImage"
     />
-    <h4>{{ page.text }}</h4>
-    <!-- <a v-for="connection in page.connections"> -->
-    <!-- Commenting here until we get a response on how pages will look -->
+    <h4>{{ this.$store.state.currentPage.text }}</h4>
+    <a
+    v-for="connection in this.$store.state.currentPage.connections"
+    :key="connection._id"
+    @click="nextPage(connection)"
+    >
+      {{ connection.text }}
+    </a>
   </div>
 </template>
 
@@ -18,8 +23,12 @@ export default {
   name: 'BookPage',
   data () {
     return {
-      book: this.$store.state.currentBook,
-      page: this.$store.state.currentPage
+      book: this.$store.state.currentBook
+    }
+  },
+  methods: {
+    nextPage (connection) {
+      this.$store.commit('updateCurrentPageId', connection.child)
     }
   }
 }
@@ -28,8 +37,8 @@ export default {
 
 <style>
 
-.paegImage {
-  min-height: 80vh;
+.pageImage {
+  max-height: 70vh;
 }
 
 </style>
