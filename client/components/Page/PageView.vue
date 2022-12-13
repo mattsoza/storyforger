@@ -2,13 +2,21 @@
 
 <template>
 <div>
-  <h2>{{ page.title }}</h2>
-  <img
+  <h2>{{ page.title }} <button @click="openEdit">✏️ Edit Page </button> <button @click="openDelete">🗑️ Delete Page</button></h2>
+
+    <img
     v-if="page.image"
     v-bind:src="page.image" height="300">
+    <div v-else class="no_img"
+    > Oh no! This Page has no Image! 
+    <button @click="openEdit">Add Image</button>
+     </div>
+
+  
+
   <p>{{ page.text }}</p>
-  <button @click="openEdit">Edit Page</button>
-  <button @click="openDelete">Delete Page</button>
+  <!-- <button @click="openEdit">✏️ Edit Page</button>
+  <button @click="openDelete">🗑️ Delete Page</button> -->
 
   <v-easy-dialog v-model="visible">
     <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
@@ -17,8 +25,10 @@
     <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
   </v-easy-dialog>
   <!-- <router-link class="routerlink" to="/story">Edit Book</router-link> -->
-
+  <div>
   <ConnectionListComponent :page="page" :pages="pages" />
+  </div>
+  
 
 </div>
 </template>
@@ -72,3 +82,13 @@ export default {
 }
 
 </script>
+
+<style>
+.no_img{
+  border: 2px solid black;
+  /* outline: #4CAF50 solid 10px; */  
+  padding: 20px;
+  /* height:5; */
+}
+
+</style>
