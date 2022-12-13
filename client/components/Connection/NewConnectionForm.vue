@@ -47,6 +47,7 @@ export default {
       }
       const r = await response.text()
       const ldj = JSON.parse(r)
+      this.$emit('connectionsChanged')
     }
   }
 }

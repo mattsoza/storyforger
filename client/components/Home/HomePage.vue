@@ -4,13 +4,13 @@
 
 <script>
 export default {
-    name: 'HomePage',
-    mounted() {
-      if (this.$store.state.username) {
-        this.$router.push({ name: 'My Stories' });
-      } else {
-        this.$router.push({ name: 'Login'});
-      }
+  name: 'HomePage',
+  mounted () {
+    if (this.$store.state.username) {
+      this.$router.push({ name: 'My Stories' })
+    } else {
+      this.$router.push({ name: 'Login' })
     }
+  }
 }
 </script>

@@ -47,15 +47,15 @@ export default {
       fetch(`/api/connection/${this.connectionId}`, params)
         .then((res) => {})
     },
-    deleteConnection (evt) {
+    async deleteConnection (evt) {
       const params = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
-      }
-
-      fetch(`/api/connection/${this.connectionId}`, params)
-        .then((res) => { res.json() })
-        .then((data) => { console.log(data) })
+      };
+      console.log("deleting");
+      const response = await fetch(`/api/connection/${this.connectionId}`, params);
+      console.log("deleted");
+      this.$emit('connectionsChanged');
     },
     followConnection () {
       this.$store.commit('updateCurrentPage', this.child)
@@ -71,7 +71,7 @@ export default {
         .then((res) => {})
     },
     getPage (pageId) {
-      let pages = [].concat(this.$store.state.currentBook.pages) // Creates deep copy of array
+      const pages = [].concat(this.$store.state.currentBook.pages) // Creates deep copy of array
       const index = pages.findIndex((p) => pageId === p._id)
       const page = pages[index]
       console.log(page)

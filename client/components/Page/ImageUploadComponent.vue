@@ -30,9 +30,9 @@ export default {
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: body
+        body
       }
-      const response = await fetch(`/api/page/638d5a2be0c981e4ac7052ce`, requestOptions);
+      const response = await fetch('/api/page/638d5a2be0c981e4ac7052ce', requestOptions)
     }
   }
 }

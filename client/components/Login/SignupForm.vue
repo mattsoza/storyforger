@@ -2,27 +2,27 @@
 <!-- Thanks to 6.1040 staff for providing framework for this :) -->
 
 <script>
-import BlockForm from '@/components/common/BlockForm.vue';
+import BlockForm from '@/components/common/BlockForm.vue'
 
 export default {
-  name: "LoginForm",
+  name: 'LoginForm',
   mixins: [BlockForm],
-  data() {
+  data () {
     return {
       url: '/api/users',
       method: 'POST',
       setUsername: true,
       hasBody: true,
       fields: [
-        {id: 'username', label: 'Username', value: ''},
-        {id: 'password', label: 'Password', value: ''}
+        { id: 'username', label: 'Username', value: '' },
+        { id: 'password', label: 'Password', value: '' }
       ],
       title: 'Create account',
       callback: () => {
-        this.$router.push({name: 'My Stories'});
+        this.$router.push({ name: 'My Stories' })
       }
     }
   }
-  
+
 }
 </script>

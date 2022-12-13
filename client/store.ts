@@ -31,7 +31,13 @@ const store = new Vuex.Store({
       state.currentPage = currentPageInit
     },
     updateCurrentPage(state, page) {
+      // Given a page object, updated the currentPage
       state.currentPage = page;
+    },
+    updateCurrentPageId(state, pageId) {
+      // Given a page ID, update the currentPage
+      const nextPage = state.currentBook.pages.filter(page => page._id === pageId)[0]
+      state.currentPage = nextPage
     },
     updatePage(state, page) {
       /**
@@ -47,6 +53,19 @@ const store = new Vuex.Store({
       state.currentBook.pages = pages
 
       state.currentPage = page
+    },
+    async updateConnections(state, pageId) {
+      const response = await fetch(`/api/connection/?pageId=${pageId}`)
+      if (!response.ok) {
+        const res = await response.text()
+        throw new Error(res.error)
+      }
+      const newConnections = await response.json()
+      let pages = [].concat(state.currentBook.pages);
+      let pageIndex = pages.findIndex((page) => page._id == pageId);
+      pages[pageIndex].connections = newConnections;
+      state.currentBook.pages = pages;
+      console.log("updated");
     },
     deletePage (state, page) {
       /**

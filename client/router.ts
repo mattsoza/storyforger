@@ -9,6 +9,7 @@ import HomePage from './components/Home/HomePage.vue';
 import ImageUploadComponent from './components/Page/ImageUploadComponent.vue';
 import BookPage from './components/Book/BookPageComponent.vue';
 import PagePage from './components/Page/PagePage.vue';
+import BookViewPage from './components/BookVIew/BookViewPage.vue';
 
 Vue.use(VueRouter);
 
@@ -19,7 +20,7 @@ const routes = [
     {path: '/account', name: 'Account', component: AccountPage},
     {path: '/image', name: "Image Upload", component: ImageUploadComponent},
     {path: '/story', name: 'Story', component: PagePage},
-    {path: '/book', name: 'Book', component: BookPage}
+    {path: '/book', name: 'Book', component: BookViewPage}
 ]
 
 const router = new VueRouter({routes});

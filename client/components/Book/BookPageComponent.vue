@@ -26,11 +26,11 @@ export default {
       placeholder: 'test'
     }
   },
-  async mounted() {
+  async mounted () {
     if (!this.$store.state.username) {
-      this.$router.push({ name: 'Login'});
+      this.$router.push({ name: 'Login' })
     }
-    this.$store.commit('getBooks');
+    this.$store.commit('getBooks')
   }
 }
 </script>

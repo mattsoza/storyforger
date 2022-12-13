@@ -8,22 +8,23 @@
         <h2>Travel from this Page to any other pages listed below!</h2>
         
 
-        <!-- <button @click="findPageConnections">Click here to findPageConnections</button> -->
+        <!-- <button @click="updateConnections">Click here to findPageConnections</button> -->
         <div v-if="(pages.length!==0 && pages.length!==1)">
 
         <li
         v-for="connection in page.connections"
         :key="connection._id"
         :connection="connection"
-        > <ConnectionComponent 
+        > <ConnectionComponent
             :connection="connection"
-            :page="page"
+            @connectionsChanged="updateConnections"
         /></li>
       </div>
         <div>
         <h3> Create a new connection from <b>{{page.title}}</b> to another page </h3>
         <NewConnectionForm
-        :page="page" :pages="pages"/>
+        :page="page" :pages="pages"
+        @connectionsChanged="updateConnections"/>
       </div>
 
       </ul>
@@ -32,7 +33,7 @@
 
 <script>
 import ConnectionComponent from './ConnectionComponent.vue'
-import NewConnectionForm from './NewConnectionForm.vue';
+import NewConnectionForm from './NewConnectionForm.vue'
 
 export default {
   name: 'ConnectionListComponent',
@@ -57,37 +58,12 @@ export default {
     }
   },
   mounted () {
-    this.findPageConnections()
+    this.updateConnections()
   },
   methods: {
-    async findBookConnections () {
-      console.log('find book connections')
-      const bookId = this.book._id
-      console.log(bookId)
-      const response = await fetch(`/api/connection/?pageId=${bookId}`)
-      console.log(response)
-
-      if (!response.ok) {
-        console.log('okay, you have an error')
-        const res = await response.text()
-        console.log(res)
-        console.log('thing above this was your res')
-        throw new Error(res.error)
-      }
-
-      const r = await response.json()
-      console.log('our list of connections:', r)
-      this.connections = r
-    },
-    async findPageConnections () {
-      const pageId = this.page._id
-      const response = await fetch(`/api/connection/?pageId=${pageId}`)
-      if (!response.ok) {
-        const res = await response.text()
-        throw new Error(res.error)
-      }
-      const r = await response.json()
-      this.connections = r
+    async updateConnections() {
+      console.log("updating");
+      this.$store.commit('updateConnections', this.page._id)
     }
   }
 }

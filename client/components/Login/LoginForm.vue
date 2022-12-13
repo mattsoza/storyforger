@@ -2,12 +2,12 @@
 <!-- Thanks to 6.1040 staff for providing framework for this :) -->
 
 <script>
-import BlockForm from '@/components/common/BlockForm.vue';
+import BlockForm from '@/components/common/BlockForm.vue'
 
 export default {
-  name: "LoginForm",
+  name: 'LoginForm',
   mixins: [BlockForm],
-  data() {
+  data () {
     return {
       url: '/api/users/session',
       method: 'POST',
@@ -19,10 +19,10 @@ export default {
       ],
       title: 'Login',
       callback: () => {
-        this.$router.push({name: 'My Stories'});
+        this.$router.push({ name: 'My Stories' })
       }
     }
   }
-  
+
 }
 </script>
