@@ -2,6 +2,7 @@ import type {Request, Response} from 'express';
 import express from 'express';
 import PageCollection from './collection';
 import * as userValidator from '../user/middleware';
+import * as pageValidator from '../page/middleware';
 import * as util from './util';
 import PageModel from './model';
 
@@ -34,7 +35,9 @@ router.post(
 
 router.delete(
   '/:pageId',
-  [],
+  [
+    pageValidator.isNotFirstPage
+  ],
   async (req: Request, res: Response) => {
     const deleted = await PageCollection.deleteOne(req.params.pageId);
     res.status(200).json({
