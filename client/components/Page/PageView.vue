@@ -2,7 +2,11 @@
 
 <template>
 <div>
-  <h2>{{ page.title }} <button @click="openEdit">✏️ Edit Page </button> <button @click="openDelete">🗑️ Delete Page</button></h2>
+  <h2>
+    {{ page.title }}
+    <button @click="openEdit">✏️ Edit Page </button>
+    <button v-if="this.page._id !== this.$store.state.currentBook.firstPage" @click="openDelete">🗑️ Delete Page</button>
+  </h2>
 
     <img
     v-if="page.image"
@@ -66,16 +70,16 @@ export default {
     }
   },
   methods: {
-    openEdit () {
+    openEdit() {
       this.visible = true
     },
-    closeEdit () {
+    closeEdit() {
       this.visible = false
     },
-    openDelete () {
+    openDelete() {
       this.deleteDialog = true
     },
-    closeDelete () {
+    closeDelete() {
       this.deleteDialog = false
     }
   }
