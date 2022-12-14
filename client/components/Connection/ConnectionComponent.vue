@@ -2,10 +2,6 @@
     <div>
       <b>{{connection.text}}</b>: From <b>{{this.parent.title}}</b> to <b>{{this.child.title}}</b>
       <!-- {{this.parent.title}} -> {{this.child.title}} -->
-      <button @click="(rename=true)">Rename Connection</button>
-      <v-easy-dialog v-model="rename">
-        <RenameConnectionForm :connection="connection" />
-      </v-easy-dialog>
       <button @click="deleteConnection"> 🗑️ Delete Connection</button>
       <button @click="followConnection"> ➡️ Follow Connection</button>
       <button @click="openEdit"> ✏️ Edit Connection</button>
