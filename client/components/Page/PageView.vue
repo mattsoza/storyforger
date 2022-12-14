@@ -1,7 +1,7 @@
 <!-- Reusable component allowing you to edit a page -->
 
 <template>
-<div>
+<div class="view">
   <div class="pageInformation">
     <h2>
       {{ page.title }}
@@ -9,19 +9,13 @@
       <button v-if="this.page._id !== this.$store.state.currentBook.firstPage" @click="openDelete">🗑️ Delete Page</button>
     </h2>
 
-      <img
-      v-if="page.image"
-      v-bind:src="page.image" height="300">
-      <div v-else class="no_img"
-      > Oh no! This Page has no Image! 
-      <button @click="openImage">Add Image</button>
+      <img v-if="page.image" v-bind:src="page.image">
+      <div v-else class="no_img">
+        <p>Oh no! This Page has no Image!</p>
+        <button @click="openImage">Add Image</button>
       </div>
 
-    
-
     <p>{{ page.text }}</p>
-    <!-- <button @click="openEdit">✏️ Edit Page</button>
-    <button @click="openDelete">🗑️ Delete Page</button> -->
 
     <v-easy-dialog v-model="visible">
       <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
@@ -33,10 +27,8 @@
       <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
     </v-easy-dialog>
   </div>
-  <!-- <router-link class="routerlink" to="/story">Edit Book</router-link> -->
-  <ConnectionListComponent class="connectionList" :page="page" :pages="pages" />
-  
 
+  <ConnectionListComponent class="connectionList" :page="page" :pages="pages" />
 </div>
 </template>
 
@@ -108,10 +100,27 @@ export default {
 }
 
 .connectionList {
-  overflow: hidden;
+  max-width: 41em;
+  width: 80%;
+  background: #eeeebb;
+  margin-right: 0;
+  margin-left: 1%;
+}
+
+img {
+  object-fit: scale-down;
+  width: 100%;
+  max-width: 50em;
+  max-height: 50em;
 }
 
 .pageInformation {
-  float: left;
+  background: #eebbee;
+  width: auto;
+  flex-shrink: 4;
+}
+
+.view {
+  display: flex;
 }
 </style>
