@@ -2,15 +2,25 @@
     <div>
       <b>{{connection.text}}</b>: From <b>{{this.parent.title}}</b> to <b>{{this.child.title}}</b>
       <!-- {{this.parent.title}} -> {{this.child.title}} -->
-      <!-- <button>Edit Connection</button> -->
+      <button @click="(rename=true)">Rename Connection</button>
+      <v-easy-dialog v-model="rename">
+        <RenameConnectionForm :connection="connection" />
+      </v-easy-dialog>
       <button @click="deleteConnection"> 🗑️ Delete Connection</button>
       <button @click="followConnection">Follow Connection</button>
     </div>
 </template>
 
 <script>
+import RenameConnectionForm from './RenameConnectionForm.vue'
+import VEasyDialog from 'v-easy-dialog'
+
 export default {
   name: 'ConnectionComponent',
+  components: {
+    VEasyDialog,
+    RenameConnectionForm
+  },
   props: {
     connection: {
       type: Object,
@@ -30,11 +40,11 @@ export default {
       editing: false
     }
   },
-  mounted(){
-    this.getChild();
+  mounted () {
+    this.getChild()
   },
   methods: {
-    getChild(){
+    getChild () {
       this.child = this.getPage(this.connection.child);
     },
     editText (evt) {
@@ -52,10 +62,10 @@ export default {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
       };
-      console.log("deleting");
+      console.log('deleting')
       const response = await fetch(`/api/connection/${this.connectionId}`, params);
-      console.log("deleted");
-      this.$emit('connectionsChanged');
+      console.log('deleted')
+      this.$emit('connectionsChanged')
     },
     followConnection () {
       this.$store.commit('updateCurrentPage', this.child)
