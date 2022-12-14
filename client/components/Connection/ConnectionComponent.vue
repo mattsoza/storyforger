@@ -1,11 +1,11 @@
 <template>
     <div>
-      <b>{{connection.text}}</b>: From <b>{{this.parent.title}}</b> to <b>{{this.child.title}}</b>
+      <b>{{connection.text}}</b> (to <b :class="{missingPage: !child.title}">{{this.child.title ? this.child.title : "MISSING PAGE"}}</b>) 
       <!-- {{this.parent.title}} -> {{this.child.title}} -->
       <!-- <button>Edit Connection</button> -->
-      <button @click="deleteConnection"> 🗑️ Delete Connection</button>
-      <button @click="followConnection"> ➡️ Follow Connection</button>
-      <button @click="openEdit"> ✏️ Edit Connection</button>
+      <button @click="deleteConnection"> 🗑️ Delete</button>
+      <button @click="followConnection"> ➡️ Follow</button>
+      <button @click="openEdit"> ✏️ Edit</button>
       
       
       
@@ -105,3 +105,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.missingPage {
+  color: red;
+}
+
+</style>

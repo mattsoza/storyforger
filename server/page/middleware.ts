@@ -3,6 +3,18 @@ import {Types} from 'mongoose';
 import BookCollection from '../book/collection';
 import PageCollection from './collection';
 
+const isPageExists = async (req: Request, res: Response, next: NextFunction) => {
+  const pageId = req.params.pageId as string;
+  const page = await PageCollection.findOneByPageId(pageId);
+  if (!page){
+    res.status(404).json({
+      error: `Page does not exist.`
+    });
+    return;
+  }
+  next();
+};
+
 const isNotFirstPage = async (req: Request, res: Response, next: NextFunction) => {
   const pageId = req.params.pageId as string;
   const page = await PageCollection.findOneByPageId(pageId);
@@ -19,5 +31,6 @@ const isNotFirstPage = async (req: Request, res: Response, next: NextFunction) =
 };
 
 export {
+  isPageExists,
   isNotFirstPage
 }

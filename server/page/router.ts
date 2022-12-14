@@ -36,6 +36,7 @@ router.post(
 router.delete(
   '/:pageId',
   [
+    pageValidator.isPageExists,
     pageValidator.isNotFirstPage
   ],
   async (req: Request, res: Response) => {

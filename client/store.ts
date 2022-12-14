@@ -79,7 +79,7 @@ const store = new Vuex.Store({
         pages.splice(idx, 1)
         state.currentBook.pages = pages
 
-        state.currentPage = null
+        state.currentPage = pages[idx-1]
     }
   }
 })

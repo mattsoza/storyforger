@@ -2,33 +2,27 @@
 
 <template>
     <div>
+      <h2>Travel from this Page to any other pages listed below!</h2>
       <ul>
-        <!-- Our connections are: {{findPageConnections()}}  -->
-        <!-- {{connections}}. -->
-        <h2>Travel from this Page to any other pages listed below!</h2>
-        
-
-        <!-- <button @click="updateConnections">Click here to findPageConnections</button> -->
-        <div v-if="(pages.length!==0 && pages.length!==1)">
-
         <li
-        v-for="connection in page.connections"
-        :key="connection._id"
-        :connection="connection"
-        > <ConnectionComponent
+          v-for="connection in page.connections"
+          :key="connection._id"
+          :connection="connection"
+        >
+          <ConnectionComponent
             :connection="connection"
             :page="page"
             @connectionsChanged="updateConnections"
-        /></li>
-      </div>
-        <div>
-        <h3> Create a new connection from <b>{{page.title}}</b> to another page </h3>
+          />
+        </li>
+      </ul>
+      <div>
+        <h3>Create a new connection from <b>{{page.title}}</b> to another page </h3>
         <NewConnectionForm
         :page="page" :pages="pages"
         @connectionsChanged="updateConnections"/>
       </div>
 
-      </ul>
     </div>
   </template>
 
@@ -70,3 +64,18 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+ul>li {
+  border: 1px solid black;
+  margin: .2em 0;
+  padding: .2em;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+</style>
