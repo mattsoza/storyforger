@@ -26,7 +26,7 @@
           :value="field.value"
           @input="field.value = $event.target.value"
         >
-        <select v-else-if="field.id === 'connection' && this.pages"
+        <select v-else-if="field.id === 'connection' && pages"
           :name="field.id"
           :value="field.value"
           v-model = "field.value" class="form-control" name="child">
@@ -84,7 +84,7 @@ export default {
       setUsername: false, // Whether or not stored username should be updated after form submission
       refreshFreets: false, // Whether or not stored freets should be updated after form submission
       alerts: {}, // Displays success/error messages encountered during form submission
-      callback: null // Function to run after successful form submission
+      callback: null, // Function to run after successful form submission
     }
   },
   props: {
@@ -116,11 +116,13 @@ export default {
         options.body = JSON.stringify(Object.fromEntries(
           this.fields.map(field => {
             if (field.id === 'image') {
-              return [field.id, this.previewImage]
-            } else {
-              const { id, value } = field
-              field.value = ''
-              return [id, value]
+              return [field.id, this.previewImage];
+            } else if (field.id === 'connection'){
+              return['child', field.value._id];
+            }else {
+              const { id, value } = field;
+              field.value = '';
+              return [id, value];
             }
           })
         ))
