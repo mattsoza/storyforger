@@ -2,31 +2,43 @@
 <!-- Webpage containing all the page elements; the PagePage! :P -->
 
 <template>
-<div @pageChange="pageChange">
+<div class="pagePage" @pageChange="pageChange">
 
-    <p>Welcome to PagePage.</p>
+    <h2>{{book.title}}</h2>
 
-    <h2>Page List</h2>
-    <PageListComponent :pages="book.pages"/>
+    
+    <div class="page-list">
+      <h2>Page List</h2>
+      <ul>
+        <li
+        v-for="page in book.pages"
+        :key="page._id"
+        :page="page"
+        :class="{currentPage: $store.state.currentPage._id === page._id}"
+        @click="pageClicked(page)"
+        >{{ page.title }}</li>
+      </ul>
+      <button @click="newPage">New Page</button>
+    </div>
 
-    <button @click="newPage">New Page</button>
+    <PageView class="page-view" v-if="$store.state.currentPage" :page="$store.state.currentPage"  :pages="$store.state.currentBook.pages"/>
   </div>
 </template>
 
 <script>
-import PageListComponent from './PageListComponent.vue'
 import ConnectionListComponent from '../Connection/ConnectionListComponent.vue'
+import PageView from './PageView.vue'
 
 export default {
   name: 'PagePage',
   components: {
-    PageListComponent,
-    ConnectionListComponent
+    ConnectionListComponent,
+    PageView
   },
   data () {
     return {
-      book: this.$store.state.currentBook
-      // currentPage: this.$store.state.currentPage
+      book: this.$store.state.currentBook,
+      currentPage: this.$store.state.currentBook.pages.filter(page => page._id === this.$store.state.currentBook.firstPage)[0]
     }
   },
   mounted () {
@@ -49,7 +61,46 @@ export default {
 
       const page = (await response.json()).page
       this.book.pages.push(page)
+    },
+    pageClicked (page) {
+      this.$store.commit('updateCurrentPage', page)
     }
   }
 }
 </script>
+
+<style scoped>
+ul>li {
+  border: 1px solid black;
+  margin: .2em 0;
+}
+ul>li:hover {
+  background-color: #bbbbbb;
+}
+.page-list {
+  float: left;
+  width: 28%;
+  max-width: 15em;
+  background-color: #dddddd;
+  margin: 0 2% 0 1%;
+  display: grid;
+}
+.page-view {
+  overflow: hidden;
+  background-color: #dddddd;
+  margin: 0 1% 0 0;
+}
+.currentPage {
+  background-color: #00bbbb;
+}
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+button {
+  margin: 0 20%;
+}
+.pagePage {
+  
+}
+</style>
