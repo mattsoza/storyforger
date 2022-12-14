@@ -4,7 +4,7 @@
 import BlockForm from '@/components/common/BlockForm.vue'
 
 export default {
-  name: 'ImageUploader',
+  name: 'TextEditor',
   mixins: [BlockForm],
   props: {
     page: {
@@ -19,9 +19,9 @@ export default {
       method: 'PATCH',
       hasBody: true,
       fields: [
-        { id: 'image', label: 'Upload Image' }
+        { id: 'text', label: 'Text', value: this.page.text },
       ],
-      title: 'Upload Image',
+      title: 'Add Text',
       callback: (res) => {
         this.$emit('updateSuccess')
         console.log(res)

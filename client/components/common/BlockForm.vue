@@ -26,6 +26,12 @@
           :value="field.value"
           @input="field.value = $event.target.value"
         >
+        <select v-else-if="field.id === 'connection' && this.pages"
+          :name="field.id"
+          :value="field.value"
+          v-model = "field.value" class="form-control" name="child">
+          <option v-for="childOption in pages" :value="childOption">{{childOption.title}}</option>
+          </select>
         <input
           v-else-if="field.id === 'image'"
           type="file"
@@ -79,6 +85,12 @@ export default {
       refreshFreets: false, // Whether or not stored freets should be updated after form submission
       alerts: {}, // Displays success/error messages encountered during form submission
       callback: null // Function to run after successful form submission
+    }
+  },
+  props: {
+    pages: {
+      type: Array,
+      required: false
     }
   },
   methods: {

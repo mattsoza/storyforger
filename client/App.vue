@@ -28,4 +28,8 @@ export default {
 body {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
+
+button {
+  margin: 1pt;
+}
 </style>
