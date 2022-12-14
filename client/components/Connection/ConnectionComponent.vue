@@ -1,13 +1,14 @@
 <template>
-    <div>
-      <b>{{connection.text}}</b> (to <b :class="{missingPage: !child}">{{(getChild()) ? getChild() : "MISSING PAGE"}}</b>) 
-      <!-- {{this.parent.title}} -> {{this.child.title}} -->
-      <!-- [].concat(this.$store.state.currentBook.pages)[idx] -->
-      <!-- {{childName}} -->
+    <div class="connection">
+      <div class="connectionText">
+       <p><b>{{connection.text}}</b> (to <b :class="{missingPage: !child}">{{(getChild()) ? getChild() : "MISSING PAGE"}}</b>)</p> 
+      </div>
 
-      <button @click="deleteConnection"> 🗑️ Delete</button>
-      <button @click="followConnection"> ➡️ Follow</button>
-      <button @click="openEdit"> ✏️ Edit</button>
+      <div class="buttons">
+        <button @click="deleteConnection"> 🗑️ Delete</button>
+        <button @click="followConnection"> ➡️ Follow</button>
+        <button @click="openEdit"> ✏️ Edit</button>
+      </div>
       <v-easy-dialog v-model="visible">
        <ConnectionEditor :pages="pages" :connection="connection" :page="page" @connectionsChanged="closeEdit"/>
       </v-easy-dialog>
@@ -121,6 +122,27 @@ export default {
 
 .missingPage {
   color: red;
+}
+
+.connection {
+  display: flex;
+}
+
+.connectionText {
+  
+}
+
+button {
+  margin-left: auto;
+}
+
+.buttons {
+  margin-left: auto;
+  display: flex;
+}
+
+p {
+  margin: 0;
 }
 
 </style>

@@ -1,22 +1,24 @@
 <!-- Reusable component showing a page of the book -->
 
 <template>
-  <div class="viewBook">
-    <h3 class="pageTitle">{{ this.$store.state.currentPage.title }}</h3>
-    <img
-    v-bind:src="this.$store.state.currentPage.image"
-    class="pageImage"
-    />
-    <h4 class="pageText">{{ this.$store.state.currentPage.text }}</h4>
-    <div class="navLinks">
-      <a
-      class="storyNavLink"
-      v-for="connection in this.$store.state.currentPage.connections"
-      :key="connection._id"
-      @click="nextPage(connection)"
-      >
-        {{ connection.text }}
-      </a>
+  <div id="background">
+    <!-- <h3 class="pageTitle">{{ this.$store.state.currentPage.title }}</h3> -->
+    <div id="viewBook" :class="{ fadeIn: fading }">
+      <img
+      v-bind:src="this.$store.state.currentPage.image"
+      class="pageImage"
+      />
+      <h4 class="pageText">{{ this.$store.state.currentPage.text }}</h4>
+      <div class="navLinks">
+        <a
+        class="storyNavLink"
+        v-for="connection in this.$store.state.currentPage.connections"
+        :key="connection._id"
+        @click="nextPage(connection)"
+        >
+          {{ connection.text }}
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -26,12 +28,20 @@ export default {
   name: 'BookPage',
   data () {
     return {
-      book: this.$store.state.currentBook
+      book: this.$store.state.currentBook,
+      fading: false
     }
   },
   methods: {
     nextPage (connection) {
+      // Changes currentPage in store
       this.$store.commit('updateCurrentPageId', connection.child)
+
+      // Fades in the next page
+      this.fading = true
+      setTimeout(() => {
+        this.fading = false
+      }, 400)
     }
   }
 }
@@ -40,11 +50,27 @@ export default {
 
 <style>
 
-div.viewBook {
+div#background {
   background-color: black;
+}
+
+div#viewBook {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.fadeIn {
+  animation: fadeIn ease .3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1
+  }
 }
 
 div.navLinks {
