@@ -4,13 +4,31 @@
       <!-- {{this.parent.title}} -> {{this.child.title}} -->
       <!-- <button>Edit Connection</button> -->
       <button @click="deleteConnection"> 🗑️ Delete Connection</button>
-      <button @click="followConnection">Follow Connection</button>
+      <button @click="followConnection"> ➡️ Follow Connection</button>
+      <button @click="openEdit"> ✏️ Edit Connection</button>
+      
+      
+      
+      <v-easy-dialog v-model="visible">
+       <ConnectionEditor :connection="this.connection" :page="page" @connectionsChanged="closeEdit"/>
+      </v-easy-dialog>
     </div>
+
+
+    
+
 </template>
 
 <script>
+import VEasyDialog from 'v-easy-dialog';
+import ConnectionEditor from '@/components/Connection/ConnectionEditor.vue';
+
 export default {
   name: 'ConnectionComponent',
+  components: {
+    VEasyDialog,
+    ConnectionEditor
+  },
   props: {
     connection: {
       type: Object,
@@ -19,7 +37,7 @@ export default {
     page: {
       type: Object,
       required: true
-    }
+    },
   },
   data () {
     return {
@@ -27,7 +45,8 @@ export default {
       child: false,
       parent: this.page,
       connectionId: this.connection._id,
-      editing: false
+      editing: false,
+      visible: false
     }
   },
   mounted(){
@@ -36,6 +55,12 @@ export default {
   methods: {
     getChild(){
       this.child = this.getPage(this.connection.child);
+    },
+    closeEdit(){
+      this.visible = false;
+    },
+    openEdit(){
+      this.visible=true;
     },
     editText (evt) {
       const params = {
