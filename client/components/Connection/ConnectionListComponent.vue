@@ -5,7 +5,8 @@
       <ul>
         <!-- Our connections are: {{findPageConnections()}}  -->
         <!-- {{connections}}. -->
-        Travel from this Page to any other pages listed below!
+        <h2>Travel from this Page to any other pages listed below!</h2>
+        
 
         <!-- <button @click="updateConnections">Click here to findPageConnections</button> -->
         <div v-if="(pages.length!==0 && pages.length!==1)">
@@ -16,11 +17,12 @@
         :connection="connection"
         > <ConnectionComponent
             :connection="connection"
+            :page="page"
             @connectionsChanged="updateConnections"
         /></li>
       </div>
         <div>
-        Link {{page.title}} to new Page
+        <h3> Create a new connection from <b>{{page.title}}</b> to another page </h3>
         <NewConnectionForm
         :page="page" :pages="pages"
         @connectionsChanged="updateConnections"/>

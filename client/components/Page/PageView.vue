@@ -13,7 +13,7 @@
     v-bind:src="page.image" height="300">
     <div v-else class="no_img"
     > Oh no! This Page has no Image! 
-    <button @click="openEdit">Add Image</button>
+    <button @click="openImage">Add Image</button>
      </div>
 
   
@@ -24,6 +24,9 @@
 
   <v-easy-dialog v-model="visible">
     <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
+  </v-easy-dialog>
+  <v-easy-dialog v-model="imageUpload">
+    <ImageUploader :page="this.page" @updateSuccess="closeEdit"/>
   </v-easy-dialog>
   <v-easy-dialog v-model="deleteDialog">
     <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
@@ -43,6 +46,7 @@ import PageEditor from '@/components/Page/PageEditor.vue'
 import PageDelete from '@/components/Page/PageDelete.vue'
 import ConnectionListComponent from '../Connection/ConnectionListComponent.vue'
 import ConnectionComponent from '../Connection/ConnectionComponent.vue'
+import ImageUploader from '@/components/Page/ImageUploader'
 
 export default {
   name: 'PageView',
@@ -51,7 +55,8 @@ export default {
     PageEditor,
     PageDelete,
     ConnectionListComponent,
-    ConnectionComponent
+    ConnectionComponent,
+    ImageUploader
   },
   props: {
     page: {
@@ -66,21 +71,28 @@ export default {
   data () {
     return {
       visible: false,
+      imageUpload: false,
       deleteDialog: false
     }
   },
   methods: {
-    openEdit() {
-      this.visible = true
+    openEdit () {
+      this.visible = true;
     },
-    closeEdit() {
-      this.visible = false
+    openImage (){
+      this.imageUpload = true;
     },
-    openDelete() {
-      this.deleteDialog = true
+    closeImage (){
+      this.imageUpload = false;
     },
-    closeDelete() {
-      this.deleteDialog = false
+    closeEdit () {
+      this.visible = false;
+    },
+    openDelete () {
+      this.deleteDialog = true;
+    },
+    closeDelete () {
+      this.deleteDialog = false;
     }
   }
 }
