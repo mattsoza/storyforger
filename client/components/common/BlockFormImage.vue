@@ -29,7 +29,7 @@
           <input
             v-else-if="field.id === 'image'"
             type="file"
-            accept="image/jpeg"
+            accept="image/*"
             :name="field.id"
             :value="field.value"
             @change="uploadImage"

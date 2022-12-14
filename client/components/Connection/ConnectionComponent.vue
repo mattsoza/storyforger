@@ -7,19 +7,24 @@
         <RenameConnectionForm :connection="connection" />
       </v-easy-dialog>
       <button @click="deleteConnection"> 🗑️ Delete Connection</button>
-      <button @click="followConnection">Follow Connection</button>
+      <button @click="followConnection"> ➡️ Follow Connection</button>
+      <button @click="openEdit"> ✏️ Edit Connection</button>
+
+      <v-easy-dialog v-model="visible">
+       <ConnectionEditor :connection="this.connection" :page="page" @connectionsChanged="closeEdit"/>
+      </v-easy-dialog>
     </div>
 </template>
 
 <script>
-import RenameConnectionForm from './RenameConnectionForm.vue'
-import VEasyDialog from 'v-easy-dialog'
+import VEasyDialog from 'v-easy-dialog';
+import ConnectionEditor from '@/components/Connection/ConnectionEditor.vue';
 
 export default {
   name: 'ConnectionComponent',
   components: {
     VEasyDialog,
-    RenameConnectionForm
+    ConnectionEditor
   },
   props: {
     connection: {
@@ -37,7 +42,8 @@ export default {
       child: false,
       parent: this.page,
       connectionId: this.connection._id,
-      editing: false
+      editing: false,
+      visible: false
     }
   },
   mounted () {
@@ -46,6 +52,12 @@ export default {
   methods: {
     getChild () {
       this.child = this.getPage(this.connection.child);
+    },
+    closeEdit () {
+      this.visible = false
+    },
+    openEdit () {
+      this.visible = true
     },
     editText (evt) {
       const params = {
