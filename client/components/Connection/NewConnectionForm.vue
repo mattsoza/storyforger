@@ -1,11 +1,11 @@
 <!-- Form for creating a new connection -->
 <template>
-  <div>
+  <div class="form">
     <select v-model = "child" class="form-control" name="child">
       <option v-for="childOption in pages" :value="childOption">{{childOption.title}}</option>
     </select>
 
-      <button v-if="child" @click="createConnection">Create Connection</button>
+      <button v-if="child" @click="createConnection">Create</button>
 
   </div>
 </template>
@@ -52,3 +52,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.form {
+  display: flex;
+}
+
+button {
+  margin: 0 0 0 .5em;
+}
+
+</style>

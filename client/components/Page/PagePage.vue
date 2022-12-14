@@ -2,7 +2,7 @@
 <!-- Webpage containing all the page elements; the PagePage! :P -->
 
 <template>
-<div class="pagePage" @pageChange="pageChange">
+<div @pageChange="pageChange">
 
     <h2>{{book.title}}</h2>
 
@@ -96,11 +96,9 @@ ul>li:hover {
 ul {
   list-style-type: none;
   padding-left: 0;
+  margin: 0;
 }
 button {
   margin: 0 20%;
-}
-.pagePage {
-  
 }
 </style>

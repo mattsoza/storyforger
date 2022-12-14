@@ -119,21 +119,21 @@ export default {
   max-width: 41em;
   width: 80%;
   background: #eeeebb;
-  margin-right: 0;
-  margin-left: 1%;
+  margin-left: auto;
 }
 
 img {
   object-fit: scale-down;
   width: 100%;
-  max-width: 50em;
-  max-height: 50em;
+  max-width: 40em;
+  max-height: 40em;
 }
 
 .pageInformation {
   background: #eebbee;
   width: auto;
   flex-shrink: 4;
+  margin-right: 1%;
 }
 
 .view {

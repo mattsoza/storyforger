@@ -2,7 +2,7 @@
 
 <template>
     <div>
-      <h2>Travel from this Page to any other pages listed below!</h2>
+      <h2>Travel from this page to any other page listed below!</h2>
       <ul>
         <li
           v-for="connection in page.connections"
@@ -16,8 +16,8 @@
           />
         </li>
       </ul>
-      <div>
-        <h3>Create a new connection from <b>{{page.title}}</b> to another page </h3>
+      <div class="newConnection">
+        <p>Create a new connection from <b>{{page.title}}</b> to another page:</p>
         <NewConnectionForm
         :page="page" :pages="pages"
         @connectionsChanged="updateConnections"/>
@@ -76,6 +76,14 @@ ul>li {
 ul {
   list-style-type: none;
   padding-left: 0;
+}
+
+.newConnection {
+  display: flex;
+}
+
+p {
+  margin: 0 .5em 0 0;
 }
 
 </style>
