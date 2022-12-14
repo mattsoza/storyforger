@@ -2,7 +2,7 @@
 
 <template>
   <div class="viewBook">
-    <h3 class="pageTitle">{{ this.$store.state.currentPage.title }}</h3>
+    <!-- <h3 class="pageTitle">{{ this.$store.state.currentPage.title }}</h3> -->
     <img
     v-bind:src="this.$store.state.currentPage.image"
     class="pageImage"
