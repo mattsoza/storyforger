@@ -70,7 +70,8 @@ export default {
 ul>li {
   border: 1px solid black;
   margin: .2em 0;
-  padding: .2em;
+  padding: .4em;
+  border-radius: .4em;
 }
 
 ul {

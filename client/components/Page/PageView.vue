@@ -118,8 +118,10 @@ export default {
 .connectionList {
   max-width: 41em;
   width: 80%;
-  background: #eeeebb;
+  background: #dddddd;
   margin-left: auto;
+  border-radius: .6em;
+  padding: .6em;
 }
 
 img {
@@ -130,10 +132,12 @@ img {
 }
 
 .pageInformation {
-  background: #eebbee;
+  background: #dddddd;
   width: auto;
   flex-shrink: 4;
   margin-right: 1%;
+  border-radius: .6em;
+  padding: .6em;
 }
 
 .view {
