@@ -2,39 +2,39 @@
 
 <template>
 <div>
-  <h2>
-    {{ page.title }}
-    <button @click="openEdit">✏️ Edit Page </button>
-    <button v-if="this.page._id !== this.$store.state.currentBook.firstPage" @click="openDelete">🗑️ Delete Page</button>
-  </h2>
+  <div class="pageInformation">
+    <h2>
+      {{ page.title }}
+      <button @click="openEdit">✏️ Edit Page </button>
+      <button v-if="this.page._id !== this.$store.state.currentBook.firstPage" @click="openDelete">🗑️ Delete Page</button>
+    </h2>
 
-    <img
-    v-if="page.image"
-    v-bind:src="page.image" height="300">
-    <div v-else class="no_img"
-    > Oh no! This Page has no Image! 
-    <button @click="openImage">Add Image</button>
-     </div>
+      <img
+      v-if="page.image"
+      v-bind:src="page.image" height="300">
+      <div v-else class="no_img"
+      > Oh no! This Page has no Image! 
+      <button @click="openImage">Add Image</button>
+      </div>
 
-  
+    
 
-  <p>{{ page.text }}</p>
-  <!-- <button @click="openEdit">✏️ Edit Page</button>
-  <button @click="openDelete">🗑️ Delete Page</button> -->
+    <p>{{ page.text }}</p>
+    <!-- <button @click="openEdit">✏️ Edit Page</button>
+    <button @click="openDelete">🗑️ Delete Page</button> -->
 
-  <v-easy-dialog v-model="visible">
-    <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
-  </v-easy-dialog>
-  <v-easy-dialog v-model="imageUpload">
-    <ImageUploader :page="this.page" @updateSuccess="closeEdit"/>
-  </v-easy-dialog>
-  <v-easy-dialog v-model="deleteDialog">
-    <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
-  </v-easy-dialog>
-  <!-- <router-link class="routerlink" to="/story">Edit Book</router-link> -->
-  <div>
-  <ConnectionListComponent :page="page" :pages="pages" />
+    <v-easy-dialog v-model="visible">
+      <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
+    </v-easy-dialog>
+    <v-easy-dialog v-model="imageUpload">
+      <ImageUploader :page="this.page" @updateSuccess="closeEdit"/>
+    </v-easy-dialog>
+    <v-easy-dialog v-model="deleteDialog">
+      <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
+    </v-easy-dialog>
   </div>
+  <!-- <router-link class="routerlink" to="/story">Edit Book</router-link> -->
+  <ConnectionListComponent class="connectionList" :page="page" :pages="pages" />
   
 
 </div>
@@ -99,7 +99,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .no_img{
   border: 2px solid black;
   /* outline: #4CAF50 solid 10px; */  
@@ -107,4 +107,11 @@ export default {
   /* height:5; */
 }
 
+.connectionList {
+  overflow: hidden;
+}
+
+.pageInformation {
+  float: left;
+}
 </style>
