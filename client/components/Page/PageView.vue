@@ -11,7 +11,7 @@
 
       <img v-if="page.image" v-bind:src="page.image">
       <div v-else class="no_img">
-        <p>Oh no! This Page has no Image!</p>
+        <p>You don't have an image for this page yet.</p>
         <button @click="openImage">Add Image</button>
       </div>
 
@@ -122,6 +122,7 @@ export default {
   margin-left: auto;
   border-radius: .6em;
   padding: .6em;
+  height: 100%;
 }
 
 img {
@@ -133,14 +134,19 @@ img {
 
 .pageInformation {
   background: #dddddd;
-  width: auto;
+  width: 100%;
   flex-shrink: 4;
-  margin-right: 1%;
+  margin-right: 2.5%;
   border-radius: .6em;
   padding: .6em;
+  height: 100%;
 }
 
 .view {
   display: flex;
+}
+
+p {
+  margin: .6em .4em;
 }
 </style>

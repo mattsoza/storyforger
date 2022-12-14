@@ -81,6 +81,7 @@ ul {
 
 .newConnection {
   display: flex;
+  margin-bottom: .6em;
 }
 
 p {
