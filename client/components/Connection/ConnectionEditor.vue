@@ -31,7 +31,7 @@ export default {
         { id: 'connection', label: 'Connection', value: this.connection.child },
 
       ],
-      title: 'Edit Connection Text',
+      title: 'Edit Connection',
       callback: (res) => {
         this.$store.commit('updateConnections', this.page._id);
         this.$emit('connectionsChanged');

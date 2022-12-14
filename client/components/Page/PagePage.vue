@@ -4,7 +4,7 @@
 <template>
 <div @pageChange="pageChange">
 
-    <h2>{{book.title}}</h2>
+    <h2 class="bookTitle">{{book.title}}</h2>
 
 
     <div class="page-list">
@@ -113,5 +113,8 @@ button {
 .pageListTitle {
   margin-left: .6em;
   margin-bottom: .6em;
+}
+.bookTitle {
+  margin-left: 1%;
 }
 </style>
