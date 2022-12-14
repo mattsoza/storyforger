@@ -2,13 +2,13 @@
 <!-- Webpage containing all the page elements; the PagePage! :P -->
 
 <template>
-<div class="pagePage" @pageChange="pageChange">
+<div @pageChange="pageChange">
 
     <h2>{{book.title}}</h2>
 
 
     <div class="page-list">
-      <h2>Page List</h2>
+      <h2 class="pageListTitle">Page List</h2>
       <ul>
         <li
         v-for="page in book.pages"
@@ -74,6 +74,8 @@ export default {
 ul>li {
   border: 1px solid black;
   margin: .2em 0;
+  padding: .4em;
+  border-radius: .4em;
 }
 ul>li:hover {
   background-color: #bbbbbb;
@@ -85,6 +87,7 @@ ul>li:hover {
   background-color: #dddddd;
   margin: 0 2% 0 1%;
   display: grid;
+  border-radius: .6em;
 }
 
 .childPage {
@@ -93,23 +96,22 @@ ul>li:hover {
 
 .page-view {
   overflow: hidden;
-  background-color: #dddddd;
   margin: 0 1% 0 0;
 }
 .currentPage {
-  background-color: #51d8d8;
+  background-color: #87ceeb;
 }
-.currentPage:hover {
-  background-color: #00bbbb;
-}
+
 ul {
   list-style-type: none;
   padding-left: 0;
+  margin: 0 .6em;
 }
 button {
-  margin: 0 20%;
+  margin: .6em 20%;
 }
-.pagePage {
-  
+.pageListTitle {
+  margin-left: .6em;
+  margin-bottom: .6em;
 }
 </style>
