@@ -10,6 +10,7 @@
     "dev": "nodemon api/index.ts -e js,ts,json"
   },
   "dependencies": {
+    "@vue-flow/core": "^1.6.0",
     "aws-sdk": "^2.1266.0",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.3",

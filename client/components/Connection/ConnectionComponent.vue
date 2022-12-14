@@ -1,15 +1,16 @@
 <template>
     <div class="connection">
       <div class="connectionText">
-        <p><b>{{connection.text}}</b> (to <b :class="{missingPage: !child}">{{this.child ? this.child.title : "MISSING PAGE"}}</b>)</p>
+       <p><b>{{connection.text}}</b> (to <b :class="{missingPage: !child}">{{(getChild()) ? getChild() : "MISSING PAGE"}}</b>)</p> 
       </div>
+
       <div class="buttons">
         <button @click="deleteConnection"> 🗑️ Delete</button>
         <button @click="followConnection"> ➡️ Follow</button>
         <button @click="openEdit"> ✏️ Edit</button>
       </div>
       <v-easy-dialog v-model="visible">
-       <ConnectionEditor :connection="this.connection" :page="page" @connectionsChanged="closeEdit"/>
+       <ConnectionEditor :pages="pages" :connection="connection" :page="page" @connectionsChanged="closeEdit"/>
       </v-easy-dialog>
     </div>
 </template>
@@ -32,16 +33,21 @@ export default {
     page: {
       type: Object,
       required: true
+    },
+    pages:{
+      type: Array,
+      required: true
     }
   },
   data () {
     return {
       text: this.connection.text,
-      child: false,
+      child: null,
+      childName: "",
       parent: this.page,
       connectionId: this.connection._id,
       editing: false,
-      visible: false
+      visible: false,
     }
   },
   mounted () {
@@ -49,10 +55,21 @@ export default {
   },
   methods: {
     getChild () {
-      this.child = this.getPage(this.connection.child);
+      const pageId = this.connection.child;
+      const book = this.$store.state.currentBook;
+      let pages = [].concat(book.pages); // Creates deep copy of array
+      const idx = pages.findIndex((p) => p._id === pageId);
+      // this.idx = idx;
+      const child = pages[idx];
+      this.child = child;
+      if (this.child == null){ return null}
+      this.childName=this.child.title;
+      // console.log(this.childName);
+      return child.title + ""
     },
     closeEdit () {
-      this.visible = false
+      // this.getChild();
+      this.visible = false;
     },
     openEdit () {
       this.visible = true

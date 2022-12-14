@@ -5,9 +5,9 @@ import store from './store';
 
 import FlowChart from 'flowchart-vue';
 
-Vue.use(FlowChart)
-
 Vue.config.productionTip = false;
+
+Vue.use(FlowChart)
 
 new Vue({
     router,

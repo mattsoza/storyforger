@@ -12,6 +12,7 @@
           <ConnectionComponent
             :connection="connection"
             :page="page"
+            :pages="pages"
             @connectionsChanged="updateConnections"
           />
         </li>

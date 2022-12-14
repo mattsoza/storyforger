@@ -23,7 +23,7 @@ export default {
         { id: 'text', label: 'Text', value: this.page.text },
         { id: 'image', label: 'Upload Image' }
       ],
-      title: 'Save',
+      title: 'Edit Page',
       callback: (res) => {
         this.$emit('updateSuccess')
         console.log(res)

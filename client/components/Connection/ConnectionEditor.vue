@@ -14,6 +14,10 @@ export default {
     page: {
         type: Object,
         required: true
+    },
+    pages: {
+        type: Array,
+        required: true
     }
   },
   data () {
@@ -24,12 +28,14 @@ export default {
       hasBody: true,
       fields: [
         { id: 'text', label: 'Text', value: this.connection.text },
+        { id: 'connection', label: 'Connection', value: this.connection.child },
+
       ],
-      title: 'Edit Connection Text',
+      title: 'Edit Connection',
       callback: (res) => {
+        this.$store.commit('updateConnections', this.page._id);
         this.$emit('connectionsChanged');
         console.log(res);
-        this.$store.commit('updateConnections', this.page._id)
       }
     }
   },

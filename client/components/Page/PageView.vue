@@ -31,7 +31,7 @@
       <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
     </v-easy-dialog>
     <v-easy-dialog v-model="textUpload">
-      <TextEditor :page="this.page" @deleteSuccess="closeText"></TextEditor>
+      <TextEditor :page="this.page" @updateSuccess="closeText"></TextEditor>
     </v-easy-dialog>
   </div>
 
