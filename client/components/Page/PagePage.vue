@@ -14,8 +14,7 @@
         v-for="page in book.pages"
         :key="page._id"
         :page="page"
-        :class="[{currentPage: $store.state.currentPage._id === page._id},
-                {childPage: $store.state.currentBook.pages.find((p) => p._id === $store.state.currentPage._id).connections.findIndex((c) => c.child === page._id) !== -1}]"
+        :class="{currentPage: $store.state.currentPage._id === page._id}"
         @click="pageClicked(page)"
         >{{ page.title }}</li>
       </ul>
@@ -90,9 +89,6 @@ ul>li:hover {
   border-radius: .6em;
 }
 
-.childPage {
-  background-color: yellow;
-}
 
 .page-view {
   overflow: hidden;
@@ -100,6 +96,10 @@ ul>li:hover {
 }
 .currentPage {
   background-color: #87ceeb;
+}
+
+.currentPage:hover {
+  background-color: #46b1db;
 }
 
 ul {
