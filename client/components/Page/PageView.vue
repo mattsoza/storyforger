@@ -18,8 +18,11 @@
       </div>
 
     
-
-    <p>{{ page.text }}</p>
+    <div>
+      <p v-if="page.text.length!=0">{{ page.text }}</p>
+      <p v-else>You don't have a caption for this page yet. <button @click = "openText">Add Text</button></p>
+    </div>
+    
     <!-- <button @click="openEdit">✏️ Edit Page</button>
     <button @click="openDelete">🗑️ Delete Page</button> -->
 
@@ -27,10 +30,13 @@
       <PageEditor :page="this.page" @updateSuccess="closeEdit"/>
     </v-easy-dialog>
     <v-easy-dialog v-model="imageUpload">
-      <ImageUploader :page="this.page" @updateSuccess="closeEdit"/>
+      <ImageUploader :page="this.page" @updateSuccess="closeImage"/>
     </v-easy-dialog>
     <v-easy-dialog v-model="deleteDialog">
       <PageDelete :page="this.page" @deleteSuccess="closeDelete"></PageDelete>
+    </v-easy-dialog>
+    <v-easy-dialog v-model="textUpload">
+      <TextEditor :page="this.page" @deleteSuccess="closeText"></TextEditor>
     </v-easy-dialog>
   </div>
   <!-- <router-link class="routerlink" to="/story">Edit Book</router-link> -->
@@ -46,7 +52,8 @@ import PageEditor from '@/components/Page/PageEditor.vue'
 import PageDelete from '@/components/Page/PageDelete.vue'
 import ConnectionListComponent from '../Connection/ConnectionListComponent.vue'
 import ConnectionComponent from '../Connection/ConnectionComponent.vue'
-import ImageUploader from '@/components/Page/ImageUploader'
+import ImageUploader from '@/components/Page/ImageUploader.vue'
+import TextEditor from '@/components/Page/TextEditor.vue'
 
 export default {
   name: 'PageView',
@@ -56,7 +63,8 @@ export default {
     PageDelete,
     ConnectionListComponent,
     ConnectionComponent,
-    ImageUploader
+    ImageUploader,
+    TextEditor
   },
   props: {
     page: {
@@ -72,12 +80,19 @@ export default {
     return {
       visible: false,
       imageUpload: false,
-      deleteDialog: false
+      deleteDialog: false,
+      textUpload: false
     }
   },
   methods: {
     openEdit () {
       this.visible = true;
+    },
+    openText(){
+      this.textUpload = true;
+    },
+    closeText(){
+      this.textUpload = false;
     },
     openImage (){
       this.imageUpload = true;
@@ -113,5 +128,6 @@ export default {
 
 .pageInformation {
   float: left;
+  padding: 10pt;
 }
 </style>

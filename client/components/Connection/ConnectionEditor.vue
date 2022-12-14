@@ -32,6 +32,7 @@ export default {
         this.$store.commit('updateConnections', this.page._id)
       }
     }
-  }
+  },
+
 }
 </script>
