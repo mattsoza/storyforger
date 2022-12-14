@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <FlowChart
+    <flowchart
     :nodes="nodes"
     :connections="connections"
     :readonly="true"

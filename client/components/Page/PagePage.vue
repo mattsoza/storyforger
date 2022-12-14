@@ -6,7 +6,7 @@
 
     <h2>{{book.title}}</h2>
 
-    
+
     <div class="page-list">
       <h2>Page List</h2>
       <ul>
@@ -14,7 +14,8 @@
         v-for="page in book.pages"
         :key="page._id"
         :page="page"
-        :class="{currentPage: $store.state.currentPage._id === page._id}"
+        :class="[{currentPage: $store.state.currentPage._id === page._id},
+                {childPage: $store.state.currentBook.pages.find((p) => p._id === $store.state.currentPage._id).connections.findIndex((c) => c.child === page._id) !== -1}]"
         @click="pageClicked(page)"
         >{{ page.title }}</li>
       </ul>
@@ -85,12 +86,20 @@ ul>li:hover {
   margin: 0 2% 0 1%;
   display: grid;
 }
+
+.childPage {
+  background-color: yellow;
+}
+
 .page-view {
   overflow: hidden;
   background-color: #dddddd;
   margin: 0 1% 0 0;
 }
 .currentPage {
+  background-color: #51d8d8;
+}
+.currentPage:hover {
   background-color: #00bbbb;
 }
 ul {
