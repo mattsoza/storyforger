@@ -1,22 +1,14 @@
 <template>
     <div>
-      <b>{{connection.text}}</b> (to <b :class="{missingPage: !child.title}">{{this.child.title ? this.child.title : "MISSING PAGE"}}</b>) 
+      <b>{{connection.text}}</b> (to <b :class="{missingPage: !child}">{{this.child ? this.child.title : "MISSING PAGE"}}</b>) 
       <!-- {{this.parent.title}} -> {{this.child.title}} -->
-      <!-- <button>Edit Connection</button> -->
       <button @click="deleteConnection"> 🗑️ Delete</button>
       <button @click="followConnection"> ➡️ Follow</button>
       <button @click="openEdit"> ✏️ Edit</button>
-      
-      
-      
       <v-easy-dialog v-model="visible">
        <ConnectionEditor :connection="this.connection" :page="page" @connectionsChanged="closeEdit"/>
       </v-easy-dialog>
     </div>
-
-
-    
-
 </template>
 
 <script>
@@ -37,7 +29,7 @@ export default {
     page: {
       type: Object,
       required: true
-    },
+    }
   },
   data () {
     return {
@@ -49,18 +41,18 @@ export default {
       visible: false
     }
   },
-  mounted(){
-    this.getChild();
+  mounted () {
+    this.getChild()
   },
   methods: {
-    getChild(){
+    getChild () {
       this.child = this.getPage(this.connection.child);
     },
-    closeEdit(){
-      this.visible = false;
+    closeEdit () {
+      this.visible = false
     },
-    openEdit(){
-      this.visible=true;
+    openEdit () {
+      this.visible = true
     },
     editText (evt) {
       const params = {
@@ -77,10 +69,10 @@ export default {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }
       };
-      console.log("deleting");
+      console.log('deleting')
       const response = await fetch(`/api/connection/${this.connectionId}`, params);
-      console.log("deleted");
-      this.$emit('connectionsChanged');
+      console.log('deleted')
+      this.$emit('connectionsChanged')
     },
     followConnection () {
       this.$store.commit('updateCurrentPage', this.child)
