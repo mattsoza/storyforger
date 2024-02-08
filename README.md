@@ -1,6 +1,8 @@
 # storyforger: Make and share your own choose-your-own-adventure stories!
 
-StoryForger is an online application that allows you to create and share 
+StoryForger is an online application that allows you to create and share choose-your-own-adventure stories, all with the power of your browser! 
+
+Created as a project for 6.1040/6.170 in Fall 2022
 
 # API Routes
 
