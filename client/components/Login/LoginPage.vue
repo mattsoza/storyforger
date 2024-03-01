@@ -61,10 +61,18 @@ export default {
 
 <style lang="scss">
 
+  h1 h2 button {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
   h1 {
     font-size: 4em;
     margin-bottom: 0rem;
     text-align: center;
+  }
+
+  h2 {
+    margin-top: .2em;
   }
 
   a {
@@ -89,21 +97,31 @@ export default {
   }
 
   .acct {
-    font-size: 1.5em;
-    padding: .4rem .6rem .4rem .6rem;
-    border-radius: 10px;
+    font-size: 2em;
+    padding: .6rem 1rem .6rem 1rem;
+    border-radius: 5px;
 
     &.signup {
-      background-color: #4DBCEC;
-      color: white;
+      background-color: white;
+      color: #3396ff;
+      border: 4px solid #3396ff;
+      transition: .2s;
     }
 
     &.signup:hover {
-      background-color: #3D95BA;
+      background-color: #3396ff;
+      color: white;
+      transition: .2s;
     }
 
     &.login {
-
+      border: 4px solid black;
+      background-color: white;
+      transition: .2s
+    }
+    &.login:hover {
+      background-color: black;
+      color:white;
     }
   }
 </style>
